@@ -28,25 +28,38 @@ class SelectOrderPage extends GetView<SelectOrderPageCTR> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SuhSelect(
-                        isSelected: !controller.isDelivery,
+                      InkWell(
                         onTap: () => controller.localOrder(),
+                        child: Row(
+                          children: [
+                            SuhSelect(
+                              isSelected: !controller.isDelivery,
+                            ),
+                            const SizedBox(
+                              width: 6,
+                            ),
+                            const SuhText(text: 'محلي'),
+                          ],
+                        ),
                       ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      const SuhText(text: 'محلي'),
                       const SizedBox(
                         width: 10,
                       ),
-                      SuhSelect(
-                        isSelected: controller.isDelivery,
+                      InkWell(
                         onTap: () => controller.deliveryOrder(),
+                        child: Row(
+                          children: [
+                            SuhSelect(
+                              isSelected: controller.isDelivery,
+                            ),
+                            const SizedBox(
+                              width: 6,
+                            ),
+                            const SuhText(text: 'توصيل'),
+                          ],
+                        ),
                       ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      const SuhText(text: 'توصيل'),
+
                     ],
                   ),
                 ),

@@ -4,6 +4,7 @@ import 'index_widgets.dart';
 class SuhButton extends StatelessWidget {
   final void Function()? onTap;
   final void Function()? onLongPress;
+  final EdgeInsetsGeometry? padding;
   final double? height;
   final double? width;
   final Color? color;
@@ -15,6 +16,7 @@ class SuhButton extends StatelessWidget {
       {Key? key,
       this.onTap,
       this.onLongPress,
+      this.padding,
       this.height,
       this.width,
       this.color,
@@ -28,15 +30,18 @@ class SuhButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       onLongPress: onLongPress,
-      borderRadius: BorderRadius.circular(radius??20),
-      child: SuhContainer(
-        height: height ?? 40,
-        width: width ?? 100,
-        margin: const EdgeInsets.all(2),
-        color: color,
-        boxShadow: boxShadow,
-        radius: radius ?? 20,
-        child: Align(child: child),
+      borderRadius: BorderRadius.circular(radius ?? 20),
+      child: Padding(
+        padding: padding?? const EdgeInsets.all(2.0),
+        child: SuhContainer(
+          height: height ?? 40,
+          width: width ?? 100,
+          margin: const EdgeInsets.all(2),
+          color: color,
+          boxShadow: boxShadow,
+          radius: radius ?? 20,
+          child: Align(child: child),
+        ),
       ),
     );
   }

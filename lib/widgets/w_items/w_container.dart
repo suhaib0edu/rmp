@@ -210,6 +210,7 @@ class ItemListOrderContainer extends StatelessWidget {
           ),
           const Spacer(),
           SuhButton(
+            padding: EdgeInsets.symmetric(horizontal: 4,vertical: 8),
             height: isEdit ? size : 18,
             width: isEdit ? size : 18,
             radius: 5,
@@ -249,6 +250,7 @@ class ItemListOrderContainer extends StatelessWidget {
                   ),
                 ),
           SuhButton(
+            padding: EdgeInsets.symmetric(horizontal: 4,vertical: 8),
             height: isEdit ? size : 18,
             width: isEdit ? size : 18,
             radius: 5,

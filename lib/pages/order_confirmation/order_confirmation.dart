@@ -212,44 +212,54 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
       return Column(
         children: [
           ...controller.categoryList.map((lCat) {
+            bool cat = false;
             int total = 0;
-            lCat.products.map((element) {}).toList();
-            return invoiceFormBase(
-                invoiceFormat: controller.invoiceFormat,
-                child: [
-                  ...lCat.products.map((e) {
-                    total = total + e.num * int.parse(e.price!);
-                    if (e.isSelect) {
-                      return Column(
-                        children: [
-                          Row(
-                            children: [
-                              cTable(
-                                  flex: 2,
-                                  text: e.name.toString(),
-                                  alignment: Alignment.centerRight),
-                              cTable(
-                                text: e.num.toString(),
-                              ),
-                              cTable(
-                                text: e.price.toString(),
-                              ),
-                              cTable(text: '${e.num * int.parse(e.price!)}'),
-                            ],
-                          ),
-                        ],
-                      );
-                    } else {
-                      return const SizedBox();
-                    }
-                  }).toList(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: SuhText(text: ' اجمالي : ${total} جنيه')),
-                  ),
-                ]);
+            lCat.products.map((element) {
+              if (element.isSelect) {
+                cat = true;
+              }
+            }).toList();
+            if (cat) {
+              return invoiceFormBase(
+                  invoiceFormat: controller.invoiceFormat,
+                  child: [
+                    ...lCat.products.map((e) {
+                      total = total + e.num * int.parse(e.price!);
+                      if (e.isSelect) {
+                        return Column(
+                          children: [
+                            Row(
+                              children: [
+                                cTable(
+                                    flex: 2,
+                                    text: e.name.toString(),
+                                    alignment: Alignment.centerRight),
+                                cTable(
+                                  text: e.num.toString(),
+                                ),
+                                cTable(
+                                  text: e.price.toString(),
+                                ),
+                                cTable(text: '${e.num * int.parse(e.price!)}'),
+                              ],
+                            ),
+                          ],
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    }).toList(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: SuhText(text: ' اجمالي : ${total} جنيه')),
+                    ),
+                  ]);
+            } else {
+              return SizedBox();
+            }
+            ;
           }).toList()
         ],
       );
@@ -271,7 +281,7 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
                           alignment: Alignment.centerRight),
                       cTable(text: e.num.toString()),
                       cTable(text: e.price.toString()),
-                      cTable(text: '${e.num*int.parse(e.price??'0')}'),
+                      cTable(text: '${e.num * int.parse(e.price ?? '0')}'),
                     ],
                   ),
                 ],
