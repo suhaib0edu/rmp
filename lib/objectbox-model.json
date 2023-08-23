@@ -1,0 +1,214 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "4:8715666431473424638",
+      "lastPropertyId": "5:798507028847208915",
+      "name": "CategoryDB",
+      "properties": [
+        {
+          "id": "1:5645046585955086477",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5939065700281882335",
+          "name": "name",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "4:435529101485807528"
+        },
+        {
+          "id": "4:6060033286032198948",
+          "name": "serverID",
+          "type": 9
+        },
+        {
+          "id": "5:798507028847208915",
+          "name": "isVisible",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:8495800287671342236",
+      "lastPropertyId": "11:8866477794268746545",
+      "name": "ProductsDB",
+      "properties": [
+        {
+          "id": "1:1670008689984023988",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "3:8035321708266396993",
+          "name": "name",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "5:2940009414949342225"
+        },
+        {
+          "id": "4:6010569588892415387",
+          "name": "price",
+          "type": 9
+        },
+        {
+          "id": "5:7782558754848394664",
+          "name": "tax",
+          "type": 9
+        },
+        {
+          "id": "6:1488464936615722266",
+          "name": "discount",
+          "type": 9
+        },
+        {
+          "id": "8:8083794403954811225",
+          "name": "categoryId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:3637124777129139603",
+          "relationTarget": "ProductsDB"
+        },
+        {
+          "id": "9:4445332278238693988",
+          "name": "serverID",
+          "type": 9
+        },
+        {
+          "id": "10:6037153654198111107",
+          "name": "num",
+          "type": 6
+        },
+        {
+          "id": "11:8866477794268746545",
+          "name": "isSelect",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:1931490235587273167",
+      "lastPropertyId": "13:1452024386275277859",
+      "name": "UserDB",
+      "properties": [
+        {
+          "id": "1:36452735215272390",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7919336593507633259",
+          "name": "username",
+          "type": 9
+        },
+        {
+          "id": "3:7581029697519353475",
+          "name": "email",
+          "type": 9
+        },
+        {
+          "id": "4:5324381029740108027",
+          "name": "phone",
+          "type": 9
+        },
+        {
+          "id": "5:7831420103405853788",
+          "name": "firstName",
+          "type": 9
+        },
+        {
+          "id": "6:5961686032200997510",
+          "name": "lastName",
+          "type": 9
+        },
+        {
+          "id": "7:6119543235390826185",
+          "name": "country",
+          "type": 9
+        },
+        {
+          "id": "8:1200095383091929483",
+          "name": "state",
+          "type": 9
+        },
+        {
+          "id": "9:7482844341439715935",
+          "name": "city",
+          "type": 9
+        },
+        {
+          "id": "10:6703804886791506084",
+          "name": "restaurantName",
+          "type": 9
+        },
+        {
+          "id": "11:3119167349901789309",
+          "name": "lastLogin",
+          "type": 9
+        },
+        {
+          "id": "12:4991074662744040923",
+          "name": "dateJoined",
+          "type": 9
+        },
+        {
+          "id": "13:1452024386275277859",
+          "name": "serverID",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "6:1931490235587273167",
+  "lastIndexId": "5:2940009414949342225",
+  "lastRelationId": "1:3575914257858153654",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [
+    4658692398430121399,
+    6164768943427883643,
+    5594130170998684037
+  ],
+  "retiredIndexUids": [
+    291984406720970486,
+    384858477119636503
+  ],
+  "retiredPropertyUids": [
+    7991683734762392080,
+    140832536613578140,
+    385478906245408483,
+    8483890488492593482,
+    6666881026347308721,
+    2688988889895510567,
+    465484743609517891,
+    3890229869076631873,
+    3411223818710236672,
+    2315606162713804884,
+    7550605911058935495,
+    1933509944080630960,
+    1561660224350413754,
+    2983609011102848759,
+    7205780534514288749,
+    7166853665062370037,
+    2472484401749808141,
+    480338331152813370,
+    1039279157071255461,
+    6123228684370520734,
+    2879853474132317440,
+    4468740718654307394
+  ],
+  "retiredRelationUids": [
+    3575914257858153654
+  ],
+  "version": 1
+}
