@@ -84,3 +84,22 @@ class ProductsDB {
     this.controller
   });
 }
+
+@Entity()
+class OrderDB {
+  @Id()
+  int id;
+  String? serverID;
+  bool isLocal;
+  DateTime? date;
+  String? cashier;
+  List<ProductsDB>? products;
+
+  OrderDB(
+      {this.id = 0,
+      this.serverID,
+      this.isLocal = false,
+      this.date,
+      this.cashier,
+      this.products});
+}

@@ -18,7 +18,7 @@ class ObjectBox {
   static Future<ObjectBox> create() async {
     final docsDir = await getApplicationDocumentsDirectory();
     // Future<Store> openStore() {...} is defined in the generated objectbox.g.dart
-    final store = await openStore(directory: p.join(docsDir.path, "rmp-localdb"));
+    final store = await openStore(directory: p.join(docsDir.path, "rmp-localdb1"));
     return ObjectBox._create(store);
   }
 
@@ -35,3 +35,4 @@ Store store = objectBox.store;
 final userDB = store.box<UserDB>();
 final productsDB = store.box<ProductsDB>();
 final categoryDB = store.box<CategoryDB>();
+final orderDB = store.box<OrderDB>();

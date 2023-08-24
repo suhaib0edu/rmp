@@ -44,7 +44,7 @@ class ContainerTextWithIcon extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(20),
         child: WContainer(
-          margin: EdgeInsets.all(2),
+          margin: const EdgeInsets.all(2),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -92,8 +92,8 @@ class TopTaps extends StatelessWidget {
                     InkWell(
                         onTap: () => Get.back(),
                         child: SuhContainer(
-                          margin: EdgeInsets.only(right: 16),
-                          padding: EdgeInsets.only(left: 6,right: 10,top: 4 ,bottom: 4),
+                          margin: const EdgeInsets.only(right: 16),
+                          padding: const EdgeInsets.only(left: 6,right: 10,top: 4 ,bottom: 4),
                           radius: 20,
                           color: SuhColors.container,
                           child: Icon(
@@ -108,7 +108,7 @@ class TopTaps extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 35,),
+                  const SizedBox(height: 35,),
                   SuhText(
                     text: title ?? 'الواجهات',
                     fontWeight: FontWeight.bold,
@@ -210,7 +210,7 @@ class ItemListOrderContainer extends StatelessWidget {
           ),
           const Spacer(),
           SuhButton(
-            padding: EdgeInsets.symmetric(horizontal: 4,vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 4,),
             height: isEdit ? size : 18,
             width: isEdit ? size : 18,
             radius: 5,
@@ -240,7 +240,7 @@ class ItemListOrderContainer extends StatelessWidget {
                     children: [
                       TextField(
                         textAlign: TextAlign.center,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                         ),
                         style: TextStyle(color: SuhColors.text),
@@ -250,7 +250,7 @@ class ItemListOrderContainer extends StatelessWidget {
                   ),
                 ),
           SuhButton(
-            padding: EdgeInsets.symmetric(horizontal: 4,vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 4,),
             height: isEdit ? size : 18,
             width: isEdit ? size : 18,
             radius: 5,
@@ -268,7 +268,7 @@ class ItemListOrderContainer extends StatelessWidget {
                     color: SuhColors.text,
                   ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 8,
           ),
         ],

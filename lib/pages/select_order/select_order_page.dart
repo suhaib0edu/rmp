@@ -23,17 +23,17 @@ class SelectOrderPage extends GetView<SelectOrderPageCTR> {
               ///isDelivery
               GetBuilder<SelectOrderPageCTR>(
                 id: 'isDeliveryID',
-                builder: (context) => WContainer(
+                builder: (ctr) => WContainer(
                   height: 60,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
-                        onTap: () => controller.localOrder(),
+                        onTap: () => ctr.localOrder(),
                         child: Row(
                           children: [
                             SuhSelect(
-                              isSelected: !controller.isDelivery,
+                              isSelected: !ctr.isDelivery,
                             ),
                             const SizedBox(
                               width: 6,
@@ -46,11 +46,11 @@ class SelectOrderPage extends GetView<SelectOrderPageCTR> {
                         width: 10,
                       ),
                       InkWell(
-                        onTap: () => controller.deliveryOrder(),
+                        onTap: () => ctr.deliveryOrder(),
                         child: Row(
                           children: [
                             SuhSelect(
-                              isSelected: controller.isDelivery,
+                              isSelected: ctr.isDelivery,
                             ),
                             const SizedBox(
                               width: 6,
@@ -59,7 +59,6 @@ class SelectOrderPage extends GetView<SelectOrderPageCTR> {
                           ],
                         ),
                       ),
-
                     ],
                   ),
                 ),
@@ -68,35 +67,34 @@ class SelectOrderPage extends GetView<SelectOrderPageCTR> {
               ///ListOrder
               GetBuilder<SelectOrderPageCTR>(
                 id: 'getCategoryWithProducts',
-                builder: (context) => ListView.builder(
+                builder: (ctr) => ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: controller.categoryList.length,
+                  itemCount: ctr.categoryList.length,
                   itemBuilder: (context, index) => Column(
                     children: [
                       ListOrderContainer(
-                        onTap: () => controller.listVisible(index: index),
-                        text: controller.categoryList[index].name,
+                        onTap: () => ctr.listVisible(index: index),
+                        text: ctr.categoryList[index].name,
                       ),
                       Visibility(
-                        visible: controller.categoryList[index].isVisible,
+                        visible: ctr.categoryList[index].isVisible,
                         child: ListView.builder(
                           shrinkWrap: true,
-                          itemCount:
-                              controller.categoryList[index].products.length,
+                          itemCount: ctr.categoryList[index].products.length,
                           itemBuilder: (context, index2) =>
                               ItemListOrderContainer(
-                            onSelectTap: () => controller.onSelectOrder(
-                                index: index, index2: index2),
-                            isSelected: controller
+                            onSelectTap: () =>
+                                ctr.onSelectOrder(index: index, index2: index2),
+                            isSelected: ctr
                                 .categoryList[index].products[index2].isSelect,
-                            title: controller
-                                .categoryList[index].products[index2].name,
-                            onTapE: () => controller.productAdd(
-                                index: index, index2: index2),
-                            onTapD: () => controller.productDel(
-                                index: index, index2: index2),
-                            hintText: controller
+                            title:
+                                ctr.categoryList[index].products[index2].name,
+                            onTapE: () =>
+                                ctr.productAdd(index: index, index2: index2),
+                            onTapD: () =>
+                                ctr.productDel(index: index, index2: index2),
+                            hintText: ctr
                                 .categoryList[index].products[index2].num
                                 .toString(),
                           ),
@@ -131,6 +129,7 @@ class SelectOrderPage extends GetView<SelectOrderPageCTR> {
                     onTap: () {
                       if (controller.isDelivery) {
                         Get.to(() => DeliveryInfoPage());
+                        controller.getProductsList();
                       } else {
                         Get.to(() => OrderConfirmationPage());
                         controller.getProductsList();
@@ -161,8 +160,8 @@ class SelectOrderPage extends GetView<SelectOrderPageCTR> {
                             alignment: Alignment.center,
                             child: GetBuilder<SelectOrderPageCTR>(
                               id: 'getTotal',
-                              builder: (context) => SuhText(
-                                text: controller.total,
+                              builder: (ctr) => SuhText(
+                                text: ctr.total,
                                 fontSize: 18,
                               ),
                             ),

@@ -182,6 +182,40 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(7, 1191071951771645428),
+      name: 'OrderDB',
+      lastPropertyId: const IdUid(5, 1485829174014952746),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 3465487230447814970),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 7349298684745273236),
+            name: 'serverID',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 6458736963500969509),
+            name: 'isLocal',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 2448058876312341054),
+            name: 'date',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 1485829174014952746),
+            name: 'cashier',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -205,7 +239,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(6, 1931490235587273167),
+      lastEntityId: const IdUid(7, 1191071951771645428),
       lastIndexId: const IdUid(5, 2940009414949342225),
       lastRelationId: const IdUid(1, 3575914257858153654),
       lastSequenceId: const IdUid(0, 0),
@@ -432,6 +466,48 @@ ModelDefinition getObjectBoxModel() {
               dateJoined: const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 26));
 
           return object;
+        }),
+    OrderDB: EntityDefinition<OrderDB>(
+        model: _entities[3],
+        toOneRelations: (OrderDB object) => [],
+        toManyRelations: (OrderDB object) => {},
+        getId: (OrderDB object) => object.id,
+        setId: (OrderDB object, int id) {
+          object.id = id;
+        },
+        objectToFB: (OrderDB object, fb.Builder fbb) {
+          final serverIDOffset = object.serverID == null
+              ? null
+              : fbb.writeString(object.serverID!);
+          final cashierOffset =
+              object.cashier == null ? null : fbb.writeString(object.cashier!);
+          fbb.startTable(6);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, serverIDOffset);
+          fbb.addBool(2, object.isLocal);
+          fbb.addInt64(3, object.date?.millisecondsSinceEpoch);
+          fbb.addOffset(4, cashierOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final dateValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 10);
+          final object = OrderDB(
+              id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
+              serverID: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 6),
+              isLocal:
+                  const fb.BoolReader().vTableGet(buffer, rootOffset, 8, false),
+              date: dateValue == null
+                  ? null
+                  : DateTime.fromMillisecondsSinceEpoch(dateValue),
+              cashier: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 12));
+
+          return object;
         })
   };
 
@@ -544,4 +620,25 @@ class UserDB_ {
   /// see [UserDB.serverID]
   static final serverID =
       QueryStringProperty<UserDB>(_entities[2].properties[12]);
+}
+
+/// [OrderDB] entity fields to define ObjectBox queries.
+class OrderDB_ {
+  /// see [OrderDB.id]
+  static final id = QueryIntegerProperty<OrderDB>(_entities[3].properties[0]);
+
+  /// see [OrderDB.serverID]
+  static final serverID =
+      QueryStringProperty<OrderDB>(_entities[3].properties[1]);
+
+  /// see [OrderDB.isLocal]
+  static final isLocal =
+      QueryBooleanProperty<OrderDB>(_entities[3].properties[2]);
+
+  /// see [OrderDB.date]
+  static final date = QueryIntegerProperty<OrderDB>(_entities[3].properties[3]);
+
+  /// see [OrderDB.cashier]
+  static final cashier =
+      QueryStringProperty<OrderDB>(_entities[3].properties[4]);
 }

@@ -1,17 +1,18 @@
+import 'package:rmp/pages/order_confirmation/order_confirmation_ctr.dart';
+
 import '../../index_c.dart';
 import '../../widgets/index_widgets.dart';
 import '../../widgets/w_items/index_w_items.dart';
 import '../select_order/select_order_page_ctr.dart';
-import 'invoice/invoice_pdf.dart';
 
-class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
+class OrderConfirmationPage extends GetView<OrderConfirmationPageCTR> {
   const OrderConfirmationPage({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => SelectOrderPageCTR());
+    Get.lazyPut(() => OrderConfirmationPageCTR());
 
     return Scaffold(
       body: Stack(
@@ -32,18 +33,18 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
                           children: [
                             invoiceFormSelectView(
                               text: 'فاتورة لكل منتج',
-                              isSelected: controller.invoiceFormat == 0,
-                              onTap: () => controller.selectFormat(0),
+                              isSelected: ctr.invoiceFormat == 0,
+                              onTap: () => ctr.selectFormat(0),
                             ),
                             invoiceFormSelectView(
                               text: 'فاتورة لكل مجموعة',
-                              isSelected: controller.invoiceFormat == 1,
-                              onTap: () => controller.selectFormat(1),
+                              isSelected: ctr.invoiceFormat == 1,
+                              onTap: () => ctr.selectFormat(1),
                             ),
                             invoiceFormSelectView(
                               text: 'فاتورة شاملة',
-                              isSelected: controller.invoiceFormat == 2,
-                              onTap: () => controller.selectFormat(2),
+                              isSelected: ctr.invoiceFormat == 2,
+                              onTap: () => ctr.selectFormat(2),
                             ),
                           ],
                         )),
@@ -54,7 +55,7 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
                 id: 'getProductsList',
                 builder: (selectOrderPageCTR) => ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: selectOrderPageCTR.listProduct.length,
                   itemBuilder: (context, index) => ItemListOrderContainer(
                     title: selectOrderPageCTR.listProduct[index].name,
@@ -72,7 +73,7 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
               ///invoice format view
               GetBuilder<SelectOrderPageCTR>(
                 id: 'selectFormat',
-                builder: (ctr) => invoiceFormatView(),
+                builder: (ctr) => invoiceFormatView(ctr),
               ),
 
               const SizedBox(
@@ -86,7 +87,7 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
             right: 0,
             child: Stack(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 105,
                 ),
                 Positioned(
@@ -95,7 +96,7 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
                   right: 0,
                   child: Stack(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 105,
                       ),
                       Positioned(
@@ -107,7 +108,7 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
                           padding:
                               const EdgeInsets.only(left: 8, right: 8, top: 15),
                           titleButton: 'طباعة',
-                          onTap: () => InvoicePDF().generatePdf(),
+                          onTap: () => controller.printOrder(),
                         ),
                       ),
                       Positioned(
@@ -124,7 +125,7 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
                               color: SuhColors.text.withOpacity(0.5),
                               radius: 30,
                               child: SuhContainer(
-                                padding: EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 width: Get.width / 2.0,
                                 height: 50,
                                 color: SuhColors.background,
@@ -164,7 +165,7 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
           SuhSelect(
             isSelected: isSelected,
           ),
-          SizedBox(
+          const SizedBox(
             width: 6,
           ),
           SuhText(
@@ -176,13 +177,14 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
     );
   }
 
-  Widget invoiceFormatView() {
-    if (controller.invoiceFormat == 0)
+  Widget invoiceFormatView(SelectOrderPageCTR ctr) {
+    controller.listProduct = ctr.listProduct;
+    if (ctr.invoiceFormat == 0) {
       return Column(
         children: [
-          ...controller.listProduct
+          ...ctr.listProduct
               .map((e) => invoiceFormBase(
-                      invoiceFormat: controller.invoiceFormat,
+                      invoiceFormat: ctr.invoiceFormat,
                       child: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -208,10 +210,10 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
               .toList(),
         ],
       );
-    else if (controller.invoiceFormat == 1) {
+    } else if (ctr.invoiceFormat == 1) {
       return Column(
         children: [
-          ...controller.categoryList.map((lCat) {
+          ...ctr.categoryList.map((lCat) {
             bool cat = false;
             int total = 0;
             lCat.products.map((element) {
@@ -221,7 +223,7 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
             }).toList();
             if (cat) {
               return invoiceFormBase(
-                  invoiceFormat: controller.invoiceFormat,
+                  invoiceFormat: ctr.invoiceFormat,
                   child: [
                     ...lCat.products.map((e) {
                       total = total + e.num * int.parse(e.price!);
@@ -253,13 +255,12 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Align(
                           alignment: Alignment.centerLeft,
-                          child: SuhText(text: ' اجمالي : ${total} جنيه')),
+                          child: SuhText(text: ' اجمالي : $total جنيه')),
                     ),
                   ]);
             } else {
-              return SizedBox();
+              return const SizedBox();
             }
-            ;
           }).toList()
         ],
       );
@@ -267,8 +268,8 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
       int total = 0;
       return Column(
         children: [
-          invoiceFormBase(invoiceFormat: controller.invoiceFormat, child: [
-            ...controller.listProduct.map((e) {
+          invoiceFormBase(invoiceFormat: ctr.invoiceFormat, child: [
+            ...ctr.listProduct.map((e) {
               total = total + e.num * int.parse(e.price!);
               return Column(
                 children: [
@@ -347,14 +348,14 @@ class OrderConfirmationPage extends GetView<SelectOrderPageCTR> {
       {required int invoiceFormat, required List<Widget> child}) {
     return SuhContainer(
       color: SuhColors.container,
-      margin: EdgeInsets.all(4),
-      padding: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(4),
+      padding: const EdgeInsets.all(8),
       radius: 10,
       child: Column(
         children: [
           textInvoice('الكاشير : محمد'),
           textInvoice('التاريخ : ${DateTime.now()}'),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Divider(

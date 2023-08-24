@@ -1,5 +1,6 @@
 import 'package:rmp/index_c.dart';
 import 'package:rmp/services/local/models.dart';
+import 'package:rmp/services/utils.dart';
 
 class SelectOrderPageCTR extends GetxController {
   bool isDelivery = false;
@@ -14,9 +15,12 @@ class SelectOrderPageCTR extends GetxController {
   }
 
   getCategoryWithProducts() {
-    categoryList = categoryDB.getAll();
-    print(categoryList[0].products.length);
-    update(['getCategoryWithProducts']);
+    try {
+      categoryList = categoryDB.getAll();
+      update(['getCategoryWithProducts']);
+    } catch (e){
+      suhErrorIN('SelectOrderPageCTR=>getCategoryWithProducts()', e);
+    }
   }
 
   getProductsList() {
