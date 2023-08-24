@@ -1,0 +1,276 @@
+import 'package:rmp/widgets/index_widgets.dart';
+
+import '../../index_c.dart';
+import '../../services/local/models.dart';
+
+// 1
+class InvoicePerProduct extends StatelessWidget {
+  final List<ProductsDB> listProduct;
+  final int invoiceFormat;
+
+  const InvoicePerProduct(
+      {Key? key, required this.listProduct, required this.invoiceFormat})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ...listProduct
+            .map((e) =>
+                BasicInvoiceTemplate(invoiceFormat: invoiceFormat, child: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      CTable(
+                          flex: 2,
+                          text: e.name.toString(),
+                          alignment: Alignment.centerRight),
+                      CTable(text: e.num.toString()),
+                      CTable(text: e.price.toString()),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 32.0, vertical: 8),
+                    child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: SuhText(
+                            text:
+                                ' اجمالي : ${e.num * int.parse(e.price!)} جنيه')),
+                  ),
+                ]))
+            .toList(),
+      ],
+    );
+  }
+}
+
+// 2
+class InvoicePerGroup extends StatelessWidget {
+  final List<CategoryDB> categoryList;
+  final int invoiceFormat;
+
+  const InvoicePerGroup(
+      {Key? key, required this.categoryList, required this.invoiceFormat})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ...categoryList.map((lCat) {
+          bool cat = false;
+          int total = 0;
+          lCat.products.map((element) {
+            if (element.isSelect) {
+              cat = true;
+            }
+          }).toList();
+          if (cat) {
+            return BasicInvoiceTemplate(invoiceFormat: invoiceFormat, child: [
+              ...lCat.products.map((e) {
+                total = total + e.num * int.parse(e.price!);
+                if (e.isSelect) {
+                  return Column(
+                    children: [
+                      Row(
+                        children: [
+                          CTable(
+                              flex: 2,
+                              text: e.name.toString(),
+                              alignment: Alignment.centerRight),
+                          CTable(
+                            text: e.num.toString(),
+                          ),
+                          CTable(
+                            text: e.price.toString(),
+                          ),
+                          CTable(text: '${e.num * int.parse(e.price!)}'),
+                        ],
+                      ),
+                    ],
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              }).toList(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: SuhText(text: ' اجمالي : $total جنيه')),
+              ),
+            ]);
+          } else {
+            return const SizedBox();
+          }
+        }).toList()
+      ],
+    );
+  }
+}
+
+// 3
+class ComprehensiveInvoice extends StatelessWidget {
+  final int invoiceFormat;
+  final List<ProductsDB> listProduct;
+
+  const ComprehensiveInvoice(
+      {Key? key, required this.invoiceFormat, required this.listProduct})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    int total = 0;
+    return Column(
+      children: [
+        BasicInvoiceTemplate(invoiceFormat: invoiceFormat, child: [
+          ...listProduct.map((e) {
+            total = total + e.num * int.parse(e.price!);
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    CTable(
+                        flex: 2,
+                        text: e.name.toString(),
+                        alignment: Alignment.centerRight),
+                    CTable(text: e.num.toString()),
+                    CTable(text: e.price.toString()),
+                    CTable(text: '${e.num * int.parse(e.price ?? '0')}'),
+                  ],
+                ),
+              ],
+            );
+          }),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8),
+            child: Align(
+                alignment: Alignment.centerLeft,
+                child: SuhText(text: ' المجموع الكلي : $total  جنيه')),
+          ),
+        ]),
+      ],
+    );
+  }
+}
+
+class BasicInvoiceTemplate extends StatelessWidget {
+  final List<Widget> child;
+  final int invoiceFormat;
+
+  const BasicInvoiceTemplate(
+      {Key? key, required this.child, required this.invoiceFormat})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SuhContainer(
+      color: SuhColors.container,
+      margin: const EdgeInsets.all(4),
+      padding: const EdgeInsets.all(8),
+      radius: 10,
+      child: Column(
+        children: [
+          const TextInvoice(
+            t: 'الكاشير : محمد',
+          ),
+          TextInvoice(
+            t: 'التاريخ : ${DateTime.now()}',
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Divider(
+            color: SuhColors.text,
+            height: 8,
+            indent: 18,
+            endIndent: 18,
+          ),
+          TopTable(
+            invoiceFormat: invoiceFormat,
+          ),
+          Divider(
+            color: SuhColors.text,
+            height: 8,
+            indent: 18,
+            endIndent: 18,
+          ),
+          ...child
+        ],
+      ),
+    );
+  }
+}
+
+class TopTable extends StatelessWidget {
+  final int invoiceFormat;
+
+  const TopTable({Key? key, required this.invoiceFormat}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const CTable(
+          flex: 2,
+          text: 'المنتج',
+          alignment: Alignment.centerRight,
+        ),
+        const CTable(
+          text: 'العدد',
+        ),
+        const CTable(
+          text: 'السعر',
+        ),
+        if (invoiceFormat > 0) const CTable(text: 'اجمالي'),
+      ],
+    );
+  }
+}
+
+///
+
+class CTable extends StatelessWidget {
+  final int flex;
+  final AlignmentGeometry alignment;
+  final String text;
+
+  const CTable(
+      {Key? key,
+      this.flex = 1,
+      this.alignment = Alignment.center,
+      required this.text})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+        flex: flex,
+        child: Align(
+            alignment: alignment,
+            child: flex > 1
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: SuhText(text: text),
+                  )
+                : SuhText(text: text)));
+  }
+}
+
+class TextInvoice extends StatelessWidget {
+  final String t;
+
+  const TextInvoice({Key? key, required this.t}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SuhText(text: t),
+      ],
+    );
+  }
+}
