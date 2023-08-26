@@ -28,6 +28,7 @@ class InvoicePerProduct extends StatelessWidget {
                           alignment: Alignment.centerRight),
                       CTable(text: e.num.toString()),
                       CTable(text: e.price.toString()),
+                      CTable(text: '${int.parse(e.discount ?? '0') * e.num}'),
                     ],
                   ),
                   Padding(
@@ -86,6 +87,7 @@ class InvoicePerGroup extends StatelessWidget {
                           CTable(
                             text: e.price.toString(),
                           ),
+                          CTable(text: '${int.parse(e.discount ?? '0') * e.num}'),
                           CTable(text: '${e.num * int.parse(e.price!)}'),
                         ],
                       ),
@@ -95,6 +97,12 @@ class InvoicePerGroup extends StatelessWidget {
                   return const SizedBox();
                 }
               }).toList(),
+              Divider(
+                color: SuhColors.text,
+                height: 8,
+                indent: 18,
+                endIndent: 18,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Align(
@@ -123,11 +131,16 @@ class ComprehensiveInvoice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int total = 0;
+    int totalTax = 0;
+    int totalDiscount = 0;
     return Column(
       children: [
         BasicInvoiceTemplate(invoiceFormat: invoiceFormat, child: [
           ...listProduct.map((e) {
-            total = total + e.num * int.parse(e.price!);
+            total = total + e.num * int.parse(e.price ?? '0');
+            totalTax = totalTax + e.num * int.parse(e.tax ?? '0');
+            totalDiscount =
+                totalDiscount + e.num * int.parse(e.discount ?? '0');
             return Column(
               children: [
                 Row(
@@ -138,18 +151,38 @@ class ComprehensiveInvoice extends StatelessWidget {
                         text: e.name.toString(),
                         alignment: Alignment.centerRight),
                     CTable(text: e.num.toString()),
-                    CTable(text: e.price.toString()),
+                    if (invoiceFormat != 3) CTable(text: e.price.toString()),
+                    if (invoiceFormat == 3)
+                      CTable(text: '${int.parse(e.tax ?? '0') * e.num}'),
+                      CTable(text: '${int.parse(e.discount ?? '0') * e.num}'),
                     CTable(text: '${e.num * int.parse(e.price ?? '0')}'),
                   ],
                 ),
               ],
             );
           }),
+          Divider(
+            color: SuhColors.text,
+            height: 8,
+            indent: 18,
+            endIndent: 18,
+          ),
+          if (invoiceFormat == 3)
+            SizedBox(height: 30,),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
             child: Align(
                 alignment: Alignment.centerLeft,
-                child: SuhText(text: ' المجموع الكلي : $total  جنيه')),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (invoiceFormat == 3)
+                      SuhText(text: ' اجمالي الخصم : $totalDiscount  جنيه'),
+                    if (invoiceFormat == 3)
+                      SuhText(text: ' اجمالي التحصيل : $totalTax  جنيه'),
+                    SuhText(text: ' المجموع الكلي : $total  جنيه'),
+                  ],
+                )),
           ),
         ]),
       ],
@@ -174,6 +207,7 @@ class BasicInvoiceTemplate extends StatelessWidget {
       radius: 10,
       child: Column(
         children: [
+          if (invoiceFormat != 3)
           const TextInvoice(
             t: 'الكاشير : محمد',
           ),
@@ -219,12 +253,10 @@ class TopTable extends StatelessWidget {
           text: 'المنتج',
           alignment: Alignment.centerRight,
         ),
-        const CTable(
-          text: 'العدد',
-        ),
-        const CTable(
-          text: 'السعر',
-        ),
+        const CTable(text: 'العدد'),
+        if (invoiceFormat != 3) const CTable(text: 'السعر'),
+        if (invoiceFormat == 3) const CTable(text: 'التحصيل'),
+        const CTable(text: 'الخصم'),
         if (invoiceFormat > 0) const CTable(text: 'اجمالي'),
       ],
     );
