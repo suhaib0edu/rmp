@@ -1,5 +1,4 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:rmp/index_c.dart';
 import 'package:rmp/pages/start/start_page.dart';
 import 'widgets/w_items/index_w_items.dart';
