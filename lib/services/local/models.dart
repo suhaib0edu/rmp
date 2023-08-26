@@ -42,7 +42,6 @@ class CategoryDB {
   String? serverID;
   @Unique()
   String? name;
-  @Backlink('category')
   final products = ToMany<ProductsDB>();
   bool isVisible;
 
@@ -59,7 +58,6 @@ class ProductsDB {
   @Id()
   int id;
   String? serverID;
-  @Unique()
   String? name;
   String? price;
   String? tax;
@@ -69,20 +67,17 @@ class ProductsDB {
   bool isSelect;
   TextEditingController? controller;
 
-  final category = ToOne<ProductsDB>();
-
-  ProductsDB({
-    this.id = 0,
-    this.serverID,
-    this.name,
-    this.price,
-    this.tax,
-    this.discount,
-    this.owner,
-    this.num = 0,
-    this.isSelect = false,
-    this.controller
-  });
+  ProductsDB(
+      {this.id = 0,
+      this.serverID,
+      this.name,
+      this.price,
+      this.tax,
+      this.discount,
+      this.owner,
+      this.num = 0,
+      this.isSelect = false,
+      this.controller});
 }
 
 @Entity()
@@ -93,13 +88,47 @@ class OrderDB {
   bool isLocal;
   DateTime? date;
   String? cashier;
-  List<ProductsDB>? products;
+  @Backlink('order')
+  final products = ToMany<ProductsForOrderDB>();
+  List<String> pName;
+  List<int> pNum;
+  List<String> pPrice;
+  List<String> pTax;
+  List<String> pDiscount;
 
-  OrderDB(
-      {this.id = 0,
-      this.serverID,
-      this.isLocal = false,
-      this.date,
-      this.cashier,
-      this.products});
+  OrderDB({
+    this.id = 0,
+    this.serverID,
+    this.isLocal = false,
+    this.date,
+    this.cashier,
+    required this.pName,
+    required this.pNum,
+    required this.pPrice,
+    required this.pTax,
+    required this.pDiscount,
+  });
+}
+
+@Entity()
+class ProductsForOrderDB {
+  @Id()
+  int id;
+  String? serverID;
+  String? name;
+  String? price;
+  String? tax;
+  String? discount;
+  int num;
+
+  final order = ToOne<OrderDB>();
+  ProductsForOrderDB({
+    this.id = 0,
+    this.serverID,
+    this.name,
+    this.price,
+    this.tax,
+    this.discount,
+    this.num = 0,
+  });
 }
