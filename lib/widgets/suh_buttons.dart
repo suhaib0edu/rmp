@@ -30,9 +30,9 @@ class SuhButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       onLongPress: onLongPress,
-      borderRadius: BorderRadius.circular(radius ?? 20),
+      borderRadius: BorderRadius.circular(radius ?? 22),
       child: Padding(
-        padding: padding?? const EdgeInsets.all(2.0),
+        padding: padding?? const EdgeInsets.all(1.0),
         child: SuhContainer(
           height: height ?? 40,
           width: width ?? 100,
