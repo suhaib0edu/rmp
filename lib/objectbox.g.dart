@@ -47,15 +47,17 @@ final _entities = <ModelEntity>[
             type: 1,
             flags: 0)
       ],
-      relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[
-        ModelBacklink(
-            name: 'products', srcEntity: 'ProductsDB', srcField: 'category')
-      ]),
+      relations: <ModelRelation>[
+        ModelRelation(
+            id: const IdUid(3, 3247930428776975403),
+            name: 'products',
+            targetId: const IdUid(5, 8495800287671342236))
+      ],
+      backlinks: <ModelBacklink>[]),
   ModelEntity(
       id: const IdUid(5, 8495800287671342236),
       name: 'ProductsDB',
-      lastPropertyId: const IdUid(11, 8866477794268746545),
+      lastPropertyId: const IdUid(13, 7649540744766023936),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -67,8 +69,7 @@ final _entities = <ModelEntity>[
             id: const IdUid(3, 8035321708266396993),
             name: 'name',
             type: 9,
-            flags: 2080,
-            indexId: const IdUid(5, 2940009414949342225)),
+            flags: 0),
         ModelProperty(
             id: const IdUid(4, 6010569588892415387),
             name: 'price',
@@ -84,13 +85,6 @@ final _entities = <ModelEntity>[
             name: 'discount',
             type: 9,
             flags: 0),
-        ModelProperty(
-            id: const IdUid(8, 8083794403954811225),
-            name: 'categoryId',
-            type: 11,
-            flags: 520,
-            indexId: const IdUid(2, 3637124777129139603),
-            relationTarget: 'ProductsDB'),
         ModelProperty(
             id: const IdUid(9, 4445332278238693988),
             name: 'serverID',
@@ -186,7 +180,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(7, 1191071951771645428),
       name: 'OrderDB',
-      lastPropertyId: const IdUid(5, 1485829174014952746),
+      lastPropertyId: const IdUid(10, 446419512849324517),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -213,7 +207,88 @@ final _entities = <ModelEntity>[
             id: const IdUid(5, 1485829174014952746),
             name: 'cashier',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 8708837412379678295),
+            name: 'pName',
+            type: 30,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 5204508799646117758),
+            name: 'pNum',
+            type: 27,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 5607146051710753931),
+            name: 'pPrice',
+            type: 30,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 8207215215487844115),
+            name: 'pTax',
+            type: 30,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 446419512849324517),
+            name: 'pDiscount',
+            type: 30,
             flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[
+        ModelBacklink(
+            name: 'products',
+            srcEntity: 'ProductsForOrderDB',
+            srcField: 'order')
+      ]),
+  ModelEntity(
+      id: const IdUid(9, 5552274399631520786),
+      name: 'ProductsForOrderDB',
+      lastPropertyId: const IdUid(8, 3564234990415245003),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 2204852089189576327),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 3825177778320396429),
+            name: 'serverID',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 5330742047627280510),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 3129006412382490449),
+            name: 'price',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 3707983089092768784),
+            name: 'tax',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 4014969054662501920),
+            name: 'discount',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 7554116511856613443),
+            name: 'num',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 3564234990415245003),
+            name: 'orderId',
+            type: 11,
+            flags: 520,
+            indexId: const IdUid(10, 5512228125240586171),
+            relationTarget: 'OrderDB')
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
@@ -239,16 +314,24 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(7, 1191071951771645428),
-      lastIndexId: const IdUid(5, 2940009414949342225),
-      lastRelationId: const IdUid(1, 3575914257858153654),
+      lastEntityId: const IdUid(9, 5552274399631520786),
+      lastIndexId: const IdUid(10, 5512228125240586171),
+      lastRelationId: const IdUid(4, 4604228141634524560),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [
         4658692398430121399,
         6164768943427883643,
-        5594130170998684037
+        5594130170998684037,
+        1781338059561684753
       ],
-      retiredIndexUids: const [291984406720970486, 384858477119636503],
+      retiredIndexUids: const [
+        291984406720970486,
+        384858477119636503,
+        6998827889582844087,
+        7276057871159736914,
+        2940009414949342225,
+        3637124777129139603
+      ],
       retiredPropertyUids: const [
         7991683734762392080,
         140832536613578140,
@@ -271,9 +354,25 @@ ModelDefinition getObjectBoxModel() {
         1039279157071255461,
         6123228684370520734,
         2879853474132317440,
-        4468740718654307394
+        4468740718654307394,
+        924786617698964368,
+        9024225116526605600,
+        5994602171102666831,
+        4389262699145661179,
+        6520267604588672963,
+        7523594336123593060,
+        6822477547729220924,
+        2531955768443694586,
+        7659665985392158937,
+        4820139890460835629,
+        7649540744766023936,
+        8083794403954811225
       ],
-      retiredRelationUids: const [3575914257858153654],
+      retiredRelationUids: const [
+        3575914257858153654,
+        8554853047031380376,
+        4604228141634524560
+      ],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
       version: 1);
@@ -282,10 +381,8 @@ ModelDefinition getObjectBoxModel() {
     CategoryDB: EntityDefinition<CategoryDB>(
         model: _entities[0],
         toOneRelations: (CategoryDB object) => [],
-        toManyRelations: (CategoryDB object) => {
-              RelInfo<ProductsDB>.toOneBacklink(8, object.id,
-                  (ProductsDB srcObject) => srcObject.category): object.products
-            },
+        toManyRelations: (CategoryDB object) =>
+            {RelInfo<CategoryDB>.toMany(3, object.id): object.products},
         getId: (CategoryDB object) => object.id,
         setId: (CategoryDB object, int id) {
           object.id = id;
@@ -317,15 +414,12 @@ ModelDefinition getObjectBoxModel() {
               isVisible: const fb.BoolReader()
                   .vTableGet(buffer, rootOffset, 12, false));
           InternalToManyAccess.setRelInfo<CategoryDB>(
-              object.products,
-              store,
-              RelInfo<ProductsDB>.toOneBacklink(
-                  8, object.id, (ProductsDB srcObject) => srcObject.category));
+              object.products, store, RelInfo<CategoryDB>.toMany(3, object.id));
           return object;
         }),
     ProductsDB: EntityDefinition<ProductsDB>(
         model: _entities[1],
-        toOneRelations: (ProductsDB object) => [object.category],
+        toOneRelations: (ProductsDB object) => [],
         toManyRelations: (ProductsDB object) => {},
         getId: (ProductsDB object) => object.id,
         setId: (ProductsDB object, int id) {
@@ -344,13 +438,12 @@ ModelDefinition getObjectBoxModel() {
           final serverIDOffset = object.serverID == null
               ? null
               : fbb.writeString(object.serverID!);
-          fbb.startTable(12);
+          fbb.startTable(14);
           fbb.addInt64(0, object.id);
           fbb.addOffset(2, nameOffset);
           fbb.addOffset(3, priceOffset);
           fbb.addOffset(4, taxOffset);
           fbb.addOffset(5, discountOffset);
-          fbb.addInt64(7, object.category.targetId);
           fbb.addOffset(8, serverIDOffset);
           fbb.addInt64(9, object.num);
           fbb.addBool(10, object.isSelect);
@@ -376,9 +469,7 @@ ModelDefinition getObjectBoxModel() {
               num: const fb.Int64Reader().vTableGet(buffer, rootOffset, 22, 0),
               isSelect: const fb.BoolReader()
                   .vTableGet(buffer, rootOffset, 24, false));
-          object.category.targetId =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
-          object.category.attach(store);
+
           return object;
         }),
     UserDB: EntityDefinition<UserDB>(
@@ -470,7 +561,11 @@ ModelDefinition getObjectBoxModel() {
     OrderDB: EntityDefinition<OrderDB>(
         model: _entities[3],
         toOneRelations: (OrderDB object) => [],
-        toManyRelations: (OrderDB object) => {},
+        toManyRelations: (OrderDB object) => {
+              RelInfo<ProductsForOrderDB>.toOneBacklink(8, object.id,
+                      (ProductsForOrderDB srcObject) => srcObject.order):
+                  object.products
+            },
         getId: (OrderDB object) => object.id,
         setId: (OrderDB object, int id) {
           object.id = id;
@@ -481,12 +576,26 @@ ModelDefinition getObjectBoxModel() {
               : fbb.writeString(object.serverID!);
           final cashierOffset =
               object.cashier == null ? null : fbb.writeString(object.cashier!);
-          fbb.startTable(6);
+          final pNameOffset = fbb.writeList(
+              object.pName.map(fbb.writeString).toList(growable: false));
+          final pNumOffset = fbb.writeListInt64(object.pNum);
+          final pPriceOffset = fbb.writeList(
+              object.pPrice.map(fbb.writeString).toList(growable: false));
+          final pTaxOffset = fbb.writeList(
+              object.pTax.map(fbb.writeString).toList(growable: false));
+          final pDiscountOffset = fbb.writeList(
+              object.pDiscount.map(fbb.writeString).toList(growable: false));
+          fbb.startTable(11);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, serverIDOffset);
           fbb.addBool(2, object.isLocal);
           fbb.addInt64(3, object.date?.millisecondsSinceEpoch);
           fbb.addOffset(4, cashierOffset);
+          fbb.addOffset(5, pNameOffset);
+          fbb.addOffset(6, pNumOffset);
+          fbb.addOffset(7, pPriceOffset);
+          fbb.addOffset(8, pTaxOffset);
+          fbb.addOffset(9, pDiscountOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -505,8 +614,77 @@ ModelDefinition getObjectBoxModel() {
                   ? null
                   : DateTime.fromMillisecondsSinceEpoch(dateValue),
               cashier: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 12));
+                  .vTableGetNullable(buffer, rootOffset, 12),
+              pName: const fb.ListReader<String>(fb.StringReader(asciiOptimization: true), lazy: false)
+                  .vTableGet(buffer, rootOffset, 14, []),
+              pNum: const fb.ListReader<int>(fb.Int64Reader(), lazy: false)
+                  .vTableGet(buffer, rootOffset, 16, []),
+              pPrice: const fb.ListReader<String>(fb.StringReader(asciiOptimization: true), lazy: false)
+                  .vTableGet(buffer, rootOffset, 18, []),
+              pTax: const fb.ListReader<String>(fb.StringReader(asciiOptimization: true), lazy: false)
+                  .vTableGet(buffer, rootOffset, 20, []),
+              pDiscount:
+                  const fb.ListReader<String>(fb.StringReader(asciiOptimization: true), lazy: false).vTableGet(buffer, rootOffset, 22, []));
+          InternalToManyAccess.setRelInfo<OrderDB>(
+              object.products,
+              store,
+              RelInfo<ProductsForOrderDB>.toOneBacklink(8, object.id,
+                  (ProductsForOrderDB srcObject) => srcObject.order));
+          return object;
+        }),
+    ProductsForOrderDB: EntityDefinition<ProductsForOrderDB>(
+        model: _entities[4],
+        toOneRelations: (ProductsForOrderDB object) => [object.order],
+        toManyRelations: (ProductsForOrderDB object) => {},
+        getId: (ProductsForOrderDB object) => object.id,
+        setId: (ProductsForOrderDB object, int id) {
+          object.id = id;
+        },
+        objectToFB: (ProductsForOrderDB object, fb.Builder fbb) {
+          final serverIDOffset = object.serverID == null
+              ? null
+              : fbb.writeString(object.serverID!);
+          final nameOffset =
+              object.name == null ? null : fbb.writeString(object.name!);
+          final priceOffset =
+              object.price == null ? null : fbb.writeString(object.price!);
+          final taxOffset =
+              object.tax == null ? null : fbb.writeString(object.tax!);
+          final discountOffset = object.discount == null
+              ? null
+              : fbb.writeString(object.discount!);
+          fbb.startTable(9);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, serverIDOffset);
+          fbb.addOffset(2, nameOffset);
+          fbb.addOffset(3, priceOffset);
+          fbb.addOffset(4, taxOffset);
+          fbb.addOffset(5, discountOffset);
+          fbb.addInt64(6, object.num);
+          fbb.addInt64(7, object.order.targetId);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
 
+          final object = ProductsForOrderDB(
+              id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
+              serverID: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 6),
+              name: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 8),
+              price: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 10),
+              tax: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 12),
+              discount: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 14),
+              num: const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
+          object.order.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
+          object.order.attach(store);
           return object;
         })
   };
@@ -531,6 +709,10 @@ class CategoryDB_ {
   /// see [CategoryDB.isVisible]
   static final isVisible =
       QueryBooleanProperty<CategoryDB>(_entities[0].properties[3]);
+
+  /// see [CategoryDB.products]
+  static final products =
+      QueryRelationToMany<CategoryDB, ProductsDB>(_entities[0].relations[0]);
 }
 
 /// [ProductsDB] entity fields to define ObjectBox queries.
@@ -555,21 +737,17 @@ class ProductsDB_ {
   static final discount =
       QueryStringProperty<ProductsDB>(_entities[1].properties[4]);
 
-  /// see [ProductsDB.category]
-  static final category =
-      QueryRelationToOne<ProductsDB, ProductsDB>(_entities[1].properties[5]);
-
   /// see [ProductsDB.serverID]
   static final serverID =
-      QueryStringProperty<ProductsDB>(_entities[1].properties[6]);
+      QueryStringProperty<ProductsDB>(_entities[1].properties[5]);
 
   /// see [ProductsDB.num]
   static final num =
-      QueryIntegerProperty<ProductsDB>(_entities[1].properties[7]);
+      QueryIntegerProperty<ProductsDB>(_entities[1].properties[6]);
 
   /// see [ProductsDB.isSelect]
   static final isSelect =
-      QueryBooleanProperty<ProductsDB>(_entities[1].properties[8]);
+      QueryBooleanProperty<ProductsDB>(_entities[1].properties[7]);
 }
 
 /// [UserDB] entity fields to define ObjectBox queries.
@@ -641,4 +819,59 @@ class OrderDB_ {
   /// see [OrderDB.cashier]
   static final cashier =
       QueryStringProperty<OrderDB>(_entities[3].properties[4]);
+
+  /// see [OrderDB.pName]
+  static final pName =
+      QueryStringVectorProperty<OrderDB>(_entities[3].properties[5]);
+
+  /// see [OrderDB.pNum]
+  static final pNum =
+      QueryIntegerVectorProperty<OrderDB>(_entities[3].properties[6]);
+
+  /// see [OrderDB.pPrice]
+  static final pPrice =
+      QueryStringVectorProperty<OrderDB>(_entities[3].properties[7]);
+
+  /// see [OrderDB.pTax]
+  static final pTax =
+      QueryStringVectorProperty<OrderDB>(_entities[3].properties[8]);
+
+  /// see [OrderDB.pDiscount]
+  static final pDiscount =
+      QueryStringVectorProperty<OrderDB>(_entities[3].properties[9]);
+}
+
+/// [ProductsForOrderDB] entity fields to define ObjectBox queries.
+class ProductsForOrderDB_ {
+  /// see [ProductsForOrderDB.id]
+  static final id =
+      QueryIntegerProperty<ProductsForOrderDB>(_entities[4].properties[0]);
+
+  /// see [ProductsForOrderDB.serverID]
+  static final serverID =
+      QueryStringProperty<ProductsForOrderDB>(_entities[4].properties[1]);
+
+  /// see [ProductsForOrderDB.name]
+  static final name =
+      QueryStringProperty<ProductsForOrderDB>(_entities[4].properties[2]);
+
+  /// see [ProductsForOrderDB.price]
+  static final price =
+      QueryStringProperty<ProductsForOrderDB>(_entities[4].properties[3]);
+
+  /// see [ProductsForOrderDB.tax]
+  static final tax =
+      QueryStringProperty<ProductsForOrderDB>(_entities[4].properties[4]);
+
+  /// see [ProductsForOrderDB.discount]
+  static final discount =
+      QueryStringProperty<ProductsForOrderDB>(_entities[4].properties[5]);
+
+  /// see [ProductsForOrderDB.num]
+  static final num =
+      QueryIntegerProperty<ProductsForOrderDB>(_entities[4].properties[6]);
+
+  /// see [ProductsForOrderDB.order]
+  static final order = QueryRelationToOne<ProductsForOrderDB, OrderDB>(
+      _entities[4].properties[7]);
 }
