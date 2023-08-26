@@ -108,7 +108,7 @@ class OrderConfirmationPage extends GetView<OrderConfirmationPageCTR> {
                           padding:
                               const EdgeInsets.only(left: 8, right: 8, top: 15),
                           titleButton: 'طباعة',
-                          onTap: () => controller.printOrder(),
+                          onTap: () => controller.setOrder(),
                         ),
                       ),
                       Positioned(
