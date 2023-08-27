@@ -89,9 +89,6 @@ flutter:
    - family: Cairo
      fonts:
        - asset: fonts/Cairo/Cairo-Regular.ttf
-   - family: invoice
-     fonts:
-       - asset: fonts/NotoSansArabicUI-ExtraCondensedBold.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
