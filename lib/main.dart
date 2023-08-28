@@ -1,5 +1,6 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:rmp/index_c.dart';
+import 'package:rmp/pages/auth/auth_page.dart';
 import 'package:rmp/pages/start/start_page.dart';
 import 'widgets/w_items/index_w_items.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: SuhColors.background,
       ),
       debugShowCheckedModeBanner: false,
-      home: const StartPage(),
+      home: const AuthPage(),
       // home: MyHomePage(),
     );
   }
