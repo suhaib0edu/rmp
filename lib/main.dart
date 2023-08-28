@@ -1,19 +1,14 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:rmp/index_c.dart';
 import 'package:rmp/pages/auth/auth_page.dart';
-import 'package:rmp/pages/start/start_page.dart';
+import 'package:rmp/services/utils.dart';
 import 'widgets/w_items/index_w_items.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initHiveForFlutter();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  objectBox = await ObjectBox.create();
-
+  await initAppDependencies();
   runApp(const MyApp());
 }
 
@@ -66,3 +61,17 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+Future<void> initAppDependencies() async {
+  await initHiveForFlutter();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  objectBox = await ObjectBox.create();
+  try{
+    configDB.getAll().isEmpty?configDB.put(ConfigDB()):null;
+  }catch (e){
+    suhErrorIN('initAppDependencies()', e);
+  }
+}
+
+
+
