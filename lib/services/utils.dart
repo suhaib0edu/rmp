@@ -1,40 +1,44 @@
 import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
+
+import '../index_c.dart';
 import '../widgets/suh_snack_bar.dart';
 
-void suhErrorIN(String name , Object e) {
-  if(e.toString().contains('Unique constraint for')){
+void suhErrorIN(String name, Object e) {
+  if (e.toString().contains('Unique constraint for')) {
     SuhSnackBar.messageElementIsExists();
   }
-  print('error in $name => $e');
+  debugPrint('###<=error=>### in $name => $e');
 }
-Future<void> getDeviceId() async {
+
+Future<List<String>?> getDeviceData() async {
+  List list = [];
   try {
-    print('Platform.isAndroid=> ${Platform.isAndroid}');
-    //
-    // DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    // AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    // print('Running on ${androidInfo.id}');
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    if(Platform.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      list = [
+        "fingerprint: ${androidInfo.fingerprint}",
+        "board: ${androidInfo.board}",
+        "model: ${androidInfo.model}",
+        "hardware: ${androidInfo.hardware}",
+      ];
+      return ['isAndroid',list.toString()];
+    } else{
+      if(Platform.isWindows){
+         WindowsDeviceInfo windowsInfo = await deviceInfo.windowsInfo;
+         list = [
+           "deviceId: ${windowsInfo.deviceId}",
+           "releaseId: ${windowsInfo.releaseId}",
+           "productId: ${windowsInfo.productId}",
+           "userName: ${windowsInfo.userName}",
+           "computerName: ${windowsInfo.computerName}",
+         ];
+         return ['isWindows',list.toString()];
+      }
+    }
   } catch (e) {
-    print(e);
+    suhErrorIN('getDeviceId()', e);
   }
+  return null;
 }
-
-Future<void> getIpAddress() async {
-  final result = await InternetAddress.lookup('google.com');
-  final ipAddress = result.first.address;
-  print(ipAddress);
-  // return ipAddress;
-}
-
-//
-// Future<void> getDeviceId() async {
-//   final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-//   if (Platform.isAndroid) {
-//     final AndroidDeviceInfo androidDeviceInfo =
-//     await deviceInfoPlugin.androidInfo;
-//     print(androidDeviceInfo.androidId);
-//   } else if (Platform.isIOS) {
-//     final IosDeviceInfo iosDeviceInfo = await deviceInfoPlugin.iosInfo;
-//     print(iosDeviceInfo.identifierForVendor);
-//   }
-// }
