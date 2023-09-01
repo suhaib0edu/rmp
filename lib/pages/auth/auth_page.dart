@@ -1,3 +1,4 @@
+import 'package:rmp/pages/start/start_page.dart';
 import 'package:rmp/widgets/index_widgets.dart';
 
 import '../../index_c.dart';
@@ -16,16 +17,32 @@ class AuthPage extends GetView<AuthPageCTR> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Icon(
-                Icons.flutter_dash,
-                color: SuhColors.background2,
-                size: 80,
+              InkWell(
+                onTap: ()=>Get.to(()=> const StartPage()),
+                child: Icon(
+                  Icons.flutter_dash,
+                  color: SuhColors.background2,
+                  size: 80,
+                ),
               ),
-              SuhTextButtonFill(
-                title: 'تسجيل',
-                color: SuhColors.buttonO,
-                width: Get.width / 2,
-                onTap: () => controller.auth(),
+              Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: SuhText(text: 'تسجيل الدخول الي  :',),
+                  ),
+                  SuhTextButtonFill(
+                    title: 'حساب المدير',
+                    color: SuhColors.buttonO,
+                    width: Get.width / 2,
+                    onTap: () => controller.auth(),
+                  ),
+                  SuhTextButtonFill(
+                    title: 'حساب المحاسب',
+                    color: SuhColors.buttonO,
+                    width: Get.width / 2,
+                  ),
+                ],
               ),
             ],
           ),
