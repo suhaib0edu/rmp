@@ -31,7 +31,7 @@ class ObjectBox {
 
 Store store = objectBox.store;
 
-final userDB = store.box<UserDB>();
+final configDB = store.box<ConfigDB>();
 final productsDB = store.box<ProductsDB>();
 final categoryDB = store.box<CategoryDB>();
 final orderDB = store.box<OrderDB>();

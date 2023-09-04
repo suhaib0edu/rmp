@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "518426399994",
+    "project_id": "rmp-app-2-08-2023",
+    "storage_bucket": "rmp-app-2-08-2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518426399994:android:f93013959ec31f3a71a543",
+        "android_client_info": {
+          "package_name": "com.restraurantmp.rmp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518426399994-n0l0qq6ljpr0mt3bb7chm704ac3tkdpl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2lOCE9DtKumVDnA08bNLNVzMMou0yG8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518426399994-n0l0qq6ljpr0mt3bb7chm704ac3tkdpl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
