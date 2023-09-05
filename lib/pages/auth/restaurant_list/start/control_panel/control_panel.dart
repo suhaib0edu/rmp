@@ -1,8 +1,9 @@
-import 'package:rmp/pages/control_panel/billing_history/billing_history_ad.dart';
-import 'package:rmp/pages/control_panel/subscriptions/subscriptions_ad.dart';
 
-import '../../index_c.dart';
-import '../../widgets/w_items/index_w_items.dart';
+import 'package:rmp/pages/auth/restaurant_list/start/control_panel/subscriptions/subscriptions_ad.dart';
+
+import '../../../../../index_c.dart';
+import '../../../../../widgets/w_items/index_w_items.dart';
+import 'billing_history/billing_history_ad.dart';
 import 'groups/groups_ad.dart';
 import 'product/product_ad.dart';
 

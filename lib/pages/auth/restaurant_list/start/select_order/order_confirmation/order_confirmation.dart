@@ -1,9 +1,8 @@
-import 'package:rmp/pages/order_confirmation/order_confirmation_ctr.dart';
-
-import '../../index_c.dart';
-import '../../widgets/index_widgets.dart';
-import '../../widgets/w_items/index_w_items.dart';
-import '../select_order/select_order_page_ctr.dart';
+import '../../../../../../index_c.dart';
+import '../../../../../../widgets/index_widgets.dart';
+import '../../../../../../widgets/w_items/index_w_items.dart';
+import '../select_order_page_ctr.dart';
+import 'order_confirmation_ctr.dart';
 
 class OrderConfirmationPage extends GetView<OrderConfirmationPageCTR> {
   const OrderConfirmationPage({

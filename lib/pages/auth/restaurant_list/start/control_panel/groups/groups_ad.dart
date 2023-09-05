@@ -1,8 +1,9 @@
-import 'package:rmp/pages/control_panel/groups/groups_ad_ctr.dart';
-import 'package:rmp/widgets/w_items/index_w_items.dart';
 
-import '../../../index_c.dart';
-import '../../../widgets/index_widgets.dart';
+
+import '../../../../../../index_c.dart';
+import '../../../../../../widgets/index_widgets.dart';
+import '../../../../../../widgets/w_items/index_w_items.dart';
+import 'groups_ad_ctr.dart';
 
 class GroupsAD extends GetView<GroupsADCTR> {
   const GroupsAD({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class GroupsAD extends GetView<GroupsADCTR> {
       body: SafeArea(
         child: ListView(
           children: [
-            TopTaps(
+            const TopTaps(
               title: 'المجموعات',
             ),
             ContainerTextWithIcon(
@@ -67,7 +68,7 @@ class GroupsAD extends GetView<GroupsADCTR> {
             hintText: 'اسم المجموعة',
             controller: controller.categoryController,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           SuhTextButtonFill(

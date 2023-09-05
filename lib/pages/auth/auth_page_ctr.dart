@@ -1,12 +1,9 @@
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:rmp/pages/start/start_page.dart';
-import 'package:rmp/services/server/graphql/graphql.dart';
 import 'package:rmp/services/utils.dart';
 import 'package:rmp/widgets/suh_snack_bar.dart';
 import '../../index_c.dart';
 import '../../models/models.dart';
-import '../restaurant_list/restaurant_list.dart';
+import 'restaurant_list/restaurant_list.dart';
 
 class AuthPageCTR extends GetxController {
   auth() async {

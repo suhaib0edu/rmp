@@ -1,9 +1,7 @@
-import 'package:rmp/pages/control_panel/product/add_product/add_prodact_ctr.dart';
-import 'package:rmp/widgets/w_items/index_w_items.dart';
-
-import '../../../../index_c.dart';
-import '../../../../services/local/models.dart';
-import '../../../../widgets/index_widgets.dart';
+import '../../../../../../../index_c.dart';
+import '../../../../../../../widgets/index_widgets.dart';
+import '../../../../../../../widgets/w_items/index_w_items.dart';
+import 'add_product_ctr.dart';
 
 class AddProductPage extends GetView<AddProductPageCTR> {
   final ProductsSL? editProduct;

@@ -95,7 +95,6 @@ class BillingHistoryADCTR extends GetxController {
   getListOrderByQuery(List<OrdersSL> query){
     try {
       for (var o in query) {
-        print(o.products.length);
         for (ProductsOrderSL e in o.products) {
           ProductsOrderSL productsD = ProductsOrderSL(
             name: e.name.toString(),

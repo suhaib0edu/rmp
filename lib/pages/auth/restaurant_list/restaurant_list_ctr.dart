@@ -1,9 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:rmp/index_c.dart';
 import 'package:rmp/models/models.dart';
-
-import '../../services/server/graphql/graphql.dart';
 
 class RestaurantListPageCTR extends GetxController {
   List<Restaurant> restaurantList = [];

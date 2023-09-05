@@ -1,8 +1,8 @@
-import 'package:rmp/pages/start/start_page.dart';
 import 'package:rmp/widgets/index_widgets.dart';
 
 import '../../index_c.dart';
 import 'auth_page_ctr.dart';
+import 'restaurant_list/start/start_page.dart';
 
 class AuthPage extends GetView<AuthPageCTR> {
   const AuthPage({Key? key}) : super(key: key);

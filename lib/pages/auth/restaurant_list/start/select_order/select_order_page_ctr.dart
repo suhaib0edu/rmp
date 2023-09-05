@@ -38,13 +38,11 @@ class SelectOrderPageCTR extends GetxController {
 
   localOrder() {
     isDelivery = false;
-    print(isDelivery);
     update(['isDeliveryID']);
   }
 
   deliveryOrder() {
     isDelivery = true;
-    print(isDelivery);
     update(['isDeliveryID']);
   }
 
@@ -87,7 +85,6 @@ class SelectOrderPageCTR extends GetxController {
 
   addOrderInProList({required int index}) {
     listProduct[index].num += 1;
-    print('listProduct[index].num=> ${listProduct[index].num}');
     getProductsList();
     getTotal();
   }

@@ -1,9 +1,8 @@
-import 'package:rmp/pages/control_panel/product/product_ad_ctr.dart';
-import 'package:rmp/services/local/models.dart';
-import 'package:rmp/pages/control_panel/groups/groups_ad_ctr.dart';
-import 'package:rmp/services/utils.dart';
-import 'package:rmp/widgets/suh_snack_bar.dart';
-import '../../../../index_c.dart';
+import '../../../../../../../index_c.dart';
+import '../../../../../../../services/utils.dart';
+import '../../../../../../../widgets/suh_snack_bar.dart';
+import '../../groups/groups_ad_ctr.dart';
+import '../product_ad_ctr.dart';
 
 class AddProductPageCTR extends GetxController {
   GroupsADCTR groupsADCTR = Get.put(GroupsADCTR());

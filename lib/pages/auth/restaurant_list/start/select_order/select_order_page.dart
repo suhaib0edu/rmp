@@ -1,9 +1,9 @@
-import 'package:rmp/pages/select_order/select_order_page_ctr.dart';
-import 'package:rmp/widgets/index_widgets.dart';
-import 'package:rmp/widgets/w_items/index_w_items.dart';
-import '../../index_c.dart';
-import '../delivery_info/delivery_info_page.dart';
-import '../order_confirmation/order_confirmation.dart';
+import '../../../../../index_c.dart';
+import '../../../../../widgets/index_widgets.dart';
+import '../../../../../widgets/w_items/index_w_items.dart';
+import 'delivery_info/delivery_info_page.dart';
+import 'order_confirmation/order_confirmation.dart';
+import 'select_order_page_ctr.dart';
 
 class SelectOrderPage extends GetView<SelectOrderPageCTR> {
   const SelectOrderPage({Key? key}) : super(key: key);
@@ -69,7 +69,7 @@ class SelectOrderPage extends GetView<SelectOrderPageCTR> {
                 id: 'getCategoryWithProducts',
                 builder: (ctr) => ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: ctr.categoryList.length,
                   itemBuilder: (context, index) => Column(
                     children: [
@@ -128,10 +128,10 @@ class SelectOrderPage extends GetView<SelectOrderPageCTR> {
                     padding: const EdgeInsets.only(left: 8, right: 8, top: 15),
                     onTap: () {
                       if (controller.isDelivery) {
-                        Get.to(() => DeliveryInfoPage());
+                        Get.to(() => const DeliveryInfoPage());
                         controller.getProductsList();
                       } else {
-                        Get.to(() => OrderConfirmationPage());
+                        Get.to(() => const OrderConfirmationPage());
                         controller.getProductsList();
                       }
                     },
@@ -151,7 +151,7 @@ class SelectOrderPage extends GetView<SelectOrderPageCTR> {
                         color: SuhColors.text.withOpacity(0.5),
                         radius: 30,
                         child: SuhContainer(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           width: Get.width / 2.0,
                           height: 50,
                           color: SuhColors.background,

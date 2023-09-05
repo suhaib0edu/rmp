@@ -1,7 +1,6 @@
 import 'package:rmp/widgets/index_widgets.dart';
 
 import '../../index_c.dart';
-import '../../services/local/models.dart';
 
 // 1
 class InvoicePerProduct extends StatelessWidget {
@@ -169,7 +168,7 @@ class ComprehensiveInvoice extends StatelessWidget {
             endIndent: 18,
           ),
           if (invoiceFormat == 3)
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
             child: Align(

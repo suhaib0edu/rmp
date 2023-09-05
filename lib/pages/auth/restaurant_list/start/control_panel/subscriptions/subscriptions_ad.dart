@@ -1,7 +1,6 @@
 import 'package:rmp/widgets/index_widgets.dart';
 import 'package:rmp/widgets/w_items/index_w_items.dart';
-
-import '../../../index_c.dart';
+import '../../../../../../index_c.dart';
 
 class SubscriptionsAD extends StatelessWidget {
   const SubscriptionsAD({Key? key}) : super(key: key);
@@ -24,7 +23,7 @@ class SubscriptionsAD extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
+                      children: const [
                         SuhText(text: 'تاريخ الاشتراك: 25/07/2023',fontSize: 12,),
                         SuhText(text: 'تاريخ الإنتهاء: 25/07/2023',fontSize: 12,),
                       ],
@@ -35,12 +34,12 @@ class SubscriptionsAD extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SuhText(text: 'رصيدك الحالي: 35.000ج',fontSize: 12,),
+                        const SuhText(text: 'رصيدك الحالي: 35.000ج',fontSize: 12,),
                         SuhContainer(
                           radius: 12,
-                          padding: EdgeInsets.symmetric(vertical: 4,horizontal: 12),
+                          padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 12),
                           color: SuhColors.text.withOpacity(0.4),
-                          child: SuhText(text: 'شحن الرصيد',fontSize: 12,),
+                          child: const SuhText(text: 'شحن الرصيد',fontSize: 12,),
                         ),
                       ],
                     ),

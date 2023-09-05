@@ -1,8 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class StartPageCTR extends GetxController{
-  final PermissionStatus _initialStatus = PermissionStatus.denied;
   final Rx<PermissionStatus> _permissionStatus = PermissionStatus.denied.obs;
 
   PermissionStatus get permissionStatus => _permissionStatus.value;
@@ -21,10 +21,10 @@ class StartPageCTR extends GetxController{
       if (status.isDenied) {
         requestPermission();
       } else {
-        print(status);
+        debugPrint(status as String?);
       }
     }catch(e){
-      print(e);
+      debugPrint(e as String?);
     }
   }
 

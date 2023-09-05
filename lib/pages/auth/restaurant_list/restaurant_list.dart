@@ -1,7 +1,7 @@
 import 'package:rmp/widgets/index_widgets.dart';
 import 'package:rmp/widgets/w_items/index_w_items.dart';
 
-import '../../index_c.dart';
+import '../../../index_c.dart';
 import 'restaurant_list_ctr.dart';
 
 class RestaurantListPage extends GetView<RestaurantListPageCTR> {

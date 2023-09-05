@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
@@ -51,7 +52,7 @@ class InvoicePDF {
           return pw.Container(
             alignment: pw.Alignment.center,
             child: pw.Text(cell, style: pw.TextStyle(font: myF, fontSize: 16)),
-            padding: pw.EdgeInsets.all(5),
+            padding: const pw.EdgeInsets.all(5),
           );
         }).toList(),
       );
@@ -62,12 +63,12 @@ class InvoicePDF {
       border: pw.TableBorder.all(width: 1, color: PdfColors.black),
       children: [
         pw.TableRow(
-          decoration: pw.BoxDecoration(color: PdfColors.grey100),
+          decoration: const pw.BoxDecoration(color: PdfColors.grey100),
           children: tableHeaders.map((header) {
             return pw.Container(
               alignment: pw.Alignment.center,
               child: pw.Text(header, style: pw.TextStyle(font: myF, fontSize: 16, fontWeight: pw.FontWeight.bold)),
-              padding: pw.EdgeInsets.all(5),
+              padding: const pw.EdgeInsets.all(5),
             );
           }).toList(),
         ),
@@ -79,7 +80,7 @@ class InvoicePDF {
     final total = pw.Row(
       mainAxisAlignment: pw.MainAxisAlignment.end,
       children: [
-        pw.Padding(padding: pw.EdgeInsets.only(top: 10)),
+        pw.Padding(padding: const pw.EdgeInsets.only(top: 10)),
         pw.Text('المجموع : \$85', style: pw.TextStyle(font: myF, fontSize: 18, fontWeight: pw.FontWeight.bold)),
       ],
     );
@@ -96,11 +97,11 @@ class InvoicePDF {
                 'الفاتورة',
                 style: pw.TextStyle(font: myF, fontSize: 24),
               ),
-              pw.Padding(padding: pw.EdgeInsets.only(top: 20)),
+              pw.Padding(padding: const pw.EdgeInsets.only(top: 20)),
               header,
-              pw.Padding(padding: pw.EdgeInsets.only(top: 20)),
+              pw.Padding(padding: const pw.EdgeInsets.only(top: 20)),
               table,
-              pw.Padding(padding: pw.EdgeInsets.only(top: 20)),
+              pw.Padding(padding: const pw.EdgeInsets.only(top: 20)),
               total,
             ],
           ),
@@ -127,7 +128,7 @@ class InvoicePDF {
         }
       }
       newPath = Platform.isAndroid ? newPath : directory.path;
-      print('object=> $newPath');
+      debugPrint('object=> $newPath');
 
       final folders =
           'RMP/Invoice/${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}';
@@ -137,7 +138,7 @@ class InvoicePDF {
           '${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}.pdf';
       final filePath = '${invoiceDirectory.path}/$fileName';
       final file = File(filePath);
-      print(filePath);
+      debugPrint(filePath);
       await file.writeAsBytes(await pdf.save());
     }
   }

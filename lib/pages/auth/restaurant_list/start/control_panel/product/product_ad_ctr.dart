@@ -1,5 +1,4 @@
 import 'package:rmp/index_c.dart';
-import 'package:rmp/services/local/models.dart';
 
 import 'add_product/add_product.dart';
 

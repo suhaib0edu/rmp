@@ -1,7 +1,6 @@
 import 'package:rmp/index_c.dart';
 import 'package:rmp/services/utils.dart';
 import 'package:rmp/widgets/suh_snack_bar.dart';
-import '../../../services/local/models.dart';
 
 
 class GroupsADCTR extends GetxController {

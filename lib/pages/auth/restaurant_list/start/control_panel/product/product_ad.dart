@@ -1,9 +1,7 @@
-import 'package:rmp/pages/control_panel/product/add_product/add_prodact_ctr.dart';
-import 'package:rmp/pages/control_panel/product/product_ad_ctr.dart';
-import 'package:rmp/widgets/w_items/index_w_items.dart';
-
-import '../../../index_c.dart';
+import '../../../../../../index_c.dart';
+import '../../../../../../widgets/w_items/index_w_items.dart';
 import 'add_product/add_product.dart';
+import 'product_ad_ctr.dart';
 
 class ProductAD extends GetView<ProductADCTR> {
   const ProductAD({Key? key}) : super(key: key);

@@ -1,9 +1,7 @@
 import 'package:rmp/widgets/w_items/index_w_items.dart';
-
-import '../../index_c.dart';
-import '../../widgets/index_widgets.dart';
+import '../../../../../../index_c.dart';
+import '../../../../../../widgets/index_widgets.dart';
 import '../order_confirmation/order_confirmation.dart';
-import '../select_order/select_order_page_ctr.dart';
 
 class DeliveryInfoPage extends StatelessWidget {
   const DeliveryInfoPage({Key? key}) : super(key: key);
@@ -14,12 +12,12 @@ class DeliveryInfoPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            TopTaps(
+            const TopTaps(
               title: 'بيانات العميل',
             ),
             Expanded(
               child: ListView(
-                children: [
+                children: const [
                   SuhTextField(
                     hintText: 'اسم العميل',
                   ),
@@ -37,7 +35,7 @@ class DeliveryInfoPage extends StatelessWidget {
               ),
             ),
             BottomTaps(
-              onTap: () => Get.to(() => OrderConfirmationPage()),
+              onTap: () => Get.to(() => const OrderConfirmationPage()),
             ),
           ],
         ),
