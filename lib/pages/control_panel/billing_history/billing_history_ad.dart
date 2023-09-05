@@ -69,6 +69,7 @@ class BillingHistoryAD extends GetView<BillingHistoryADCTR> {
             ComprehensiveInvoice(
               invoiceFormat: 3,
               listProduct: controller.listOrderV,
+              dateTime: controller.dateTime,
             ),
           ],
         ),

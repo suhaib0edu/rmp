@@ -4,7 +4,7 @@ import 'package:rmp/services/local/models.dart';
 import 'add_product/add_product.dart';
 
 class ProductADCTR extends GetxController {
-  List<ProductsDB> productList = [];
+  List<ProductsSL> productList = [];
 
   @override
   void onInit() {
@@ -13,21 +13,26 @@ class ProductADCTR extends GetxController {
   }
 
   deleteProduct(int id) {
-    productsDB.remove(id);
+    productsSL.remove(id);
     getAllProducts();
   }
 
   getAllProducts() {
     productList = [];
-    categoryDB.getAll().forEach((element) {
-      for (var element in element.products) {
-        productList.add(element);
+    categorySL.getAll().forEach((element) {
+      for (ProductsSL e in element.products) {
+        productList.add(ProductsSL(
+          name: e.name,
+          price: e.price,
+          tax: e.tax,
+          discount: e.discount,
+        ));
       }});
     update(['getAllProducts']);
   }
 
   editProduct(int id) {
-    var p = productsDB.get(id);
+    var p = productsSL.get(id);
     Get.to(() => AddProductPage(
           editProduct: p,
         ));

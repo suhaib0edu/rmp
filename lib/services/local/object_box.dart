@@ -17,13 +17,13 @@ class ObjectBox {
   static Future<ObjectBox> create() async {
     final docsDir = await getApplicationDocumentsDirectory();
     // Future<Store> openStore() {...} is defined in the generated objectbox.g.dart
-    final store = await openStore(directory: p.join(docsDir.path, "rmp-localdb"));
+    final store = await openStore(directory: p.join(docsDir.path, "rmpDB"));
     return ObjectBox._create(store);
   }
 
   static void deleteDbFiles() async {
     getApplicationDocumentsDirectory().then((docDir) {
-      final directory = Directory('${docDir.path}/rmp-localdb');
+      final directory = Directory('${docDir.path}/rmpDB');
       directory.deleteSync(recursive: true);
     });
   }
@@ -32,7 +32,7 @@ class ObjectBox {
 Store store = objectBox.store;
 
 final configDB = store.box<ConfigDB>();
-final productsDB = store.box<ProductsDB>();
-final categoryDB = store.box<CategoryDB>();
-final orderDB = store.box<OrderDB>();
-final productsForOrderDB = store.box<ProductsForOrderDB>();
+final categorySL = store.box<CategorySL>();
+final orderSL = store.box<OrdersSL>();
+final productsOrderSL = store.box<ProductsOrderSL>();
+final productsSL = store.box<ProductsSL>();

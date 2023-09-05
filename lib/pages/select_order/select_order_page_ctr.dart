@@ -3,9 +3,9 @@ import 'package:rmp/services/utils.dart';
 
 class SelectOrderPageCTR extends GetxController {
   bool isDelivery = false;
-  List<CategoryDB> categoryList = [];
+  List<CategorySL> categoryList = [];
   String total = '0.00';
-  List<ProductsDB> listProduct = <ProductsDB>[];
+  List<ProductsSL> listProduct = <ProductsSL>[];
 
   @override
   void onInit() {
@@ -15,7 +15,7 @@ class SelectOrderPageCTR extends GetxController {
 
   getCategoryWithProducts() {
     try {
-      categoryList = categoryDB.getAll();
+      categoryList = categorySL.getAll();
       update(['getCategoryWithProducts']);
     } catch (e){
       suhErrorIN('SelectOrderPageCTR=>getCategoryWithProducts()', e);
@@ -24,7 +24,7 @@ class SelectOrderPageCTR extends GetxController {
 
   getProductsList() {
     listProduct = [];
-    for (CategoryDB cat in categoryList) {
+    for (CategorySL cat in categoryList) {
       for (var pro in cat.products) {
         if (pro.isSelect) {
           listProduct.add(pro);

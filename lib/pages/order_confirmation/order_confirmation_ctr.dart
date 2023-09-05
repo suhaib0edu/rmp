@@ -2,37 +2,33 @@ import 'package:rmp/index_c.dart';
 import 'package:rmp/services/utils.dart';
 
 class OrderConfirmationPageCTR extends GetxController {
-  List<ProductsDB> listProduct = <ProductsDB>[];
-  List<ProductsForOrderDB> listOrderP = <ProductsForOrderDB>[];
+  List<ProductsSL> listProduct = <ProductsSL>[];
+  List<ProductsOrderSL> listOrderP = <ProductsOrderSL>[];
 
   setOrder() {
     try {
-      OrderDB orderD = OrderDB(
-        isLocal: false,
+      listOrderP = [];
+      OrdersSL orderD = OrdersSL(
         date: DateTime.now(),
-        cashier: 'محمد',
-        pName: listProduct.map((e) => e.name.toString()).toList(),
-        pNum: listProduct.map((e) => e.num).toList(),
-        pPrice: listProduct.map((e) => e.price.toString()).toList(),
-        pTax: listProduct.map((e) => e.tax.toString()).toList(),
-        pDiscount: listProduct.map((e) => e.discount.toString()).toList(),
       );
       for (var e in listProduct) {
+        ProductsOrderSL productsOrderSL = ProductsOrderSL(
+          name: e.name,
+          num: e.num,
+          price: e.price,
+          tax: e.tax,
+          discount: e.discount,
+        );
         listOrderP.add(
-          ProductsForOrderDB(
-            name: e.name,
-            num: e.num,
-            price: e.price,
-            tax: e.tax,
-            discount: e.discount,
-          ),
+          productsOrderSL,
         );
       }
       orderD.products.addAll(listOrderP);
-      orderDB.put(orderD);
+
+      orderSL.put(orderD);
       //InvoicePDF().generatePdf();
     } catch (e) {
-      suhErrorIN('setOrder()', e);
+      suhErrorIN('OrderConfirmationPageCTR=>setOrder()', e);
     }
   }
 }

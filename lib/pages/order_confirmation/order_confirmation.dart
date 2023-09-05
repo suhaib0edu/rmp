@@ -193,6 +193,7 @@ class OrderConfirmationPage extends GetView<OrderConfirmationPageCTR> {
       return ComprehensiveInvoice(
         listProduct: ctr.listProduct,
         invoiceFormat: ctr.invoiceFormat,
+        dateTime: DateTime.now(),
       );
     }
   }

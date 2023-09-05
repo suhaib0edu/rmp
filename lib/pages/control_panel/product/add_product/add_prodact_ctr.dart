@@ -10,7 +10,7 @@ class AddProductPageCTR extends GetxController {
   ProductADCTR productADCTR = Get.put(ProductADCTR());
   bool visibleCategory = false;
   String selectCategory = 'حدد المجموعة';
-  CategoryDB category = CategoryDB();
+  CategorySL category = CategorySL();
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController taxController = TextEditingController();
@@ -29,22 +29,22 @@ class AddProductPageCTR extends GetxController {
   addProduct() async {
     try {
       if (areAllFieldsNotEmpty() && category.id > 0) {
-        ProductsDB product = ProductsDB(
+        ProductsSL product = ProductsSL(
             name: nameController.text,
             price: priceController.text,
             tax: taxController.text,
             discount: discountController.text);
-        CategoryDB? categoryD = categoryDB.get(category.id);
+        CategorySL? categoryD = categorySL.get(category.id);
 
         if (categoryD != null) {
           if (!isEditP) {
             categoryD.products.add(product);
-            categoryDB.put(categoryD);
+            categorySL.put(categoryD);
           } else {
-            var pro = productsDB.get(editID);
+            var pro = productsSL.get(editID);
             if (pro != null) {
               pro.price = product.price;
-              productsDB.put(pro);
+              productsSL.put(pro);
             }
           }
           productADCTR.getAllProducts();
@@ -58,7 +58,7 @@ class AddProductPageCTR extends GetxController {
     }
   }
 
-  void editProduct({required ProductsDB? editProduct}) {
+  void editProduct({required ProductsSL? editProduct}) {
     if (editProduct != null) {
       nameController.text = editProduct.name.toString();
       priceController.text = editProduct.price.toString();

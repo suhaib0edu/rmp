@@ -6,7 +6,7 @@ import '../../../services/local/models.dart';
 
 class GroupsADCTR extends GetxController {
   TextEditingController categoryController = TextEditingController();
-  List<CategoryDB> listCategory = [];
+  List<CategorySL> listCategory = [];
 
 
   @override
@@ -18,10 +18,10 @@ class GroupsADCTR extends GetxController {
   addCategory() {
     try {
       if (categoryController.text.isNotEmpty) {
-        CategoryDB category = CategoryDB(
+        CategorySL category = CategorySL(
             name: categoryController.text.toString()
         );
-        categoryDB.put(category);
+        categorySL.put(category);
         Get.back();
       } else {
         SuhSnackBar.messageCheckFieldNotEmpty();
@@ -33,21 +33,21 @@ class GroupsADCTR extends GetxController {
   }
 
   editCategory(int id){
-    CategoryDB? category = categoryDB.get(id);
+    CategorySL? category = categorySL.get(id);
     category!.name = categoryController.text;
-    categoryDB.put(category);
+    categorySL.put(category);
     Get.back();
     getAllCategory();
   }
 
   getAllCategory(){
     listCategory = [];
-    listCategory.addAll(categoryDB.getAll());
+    listCategory.addAll(categorySL.getAll());
     update(['getAllCategory']);
   }
 
   deleteCategory(int id){
-    categoryDB.remove(id);
+    categorySL.remove(id);
     getAllCategory();
   }
 }

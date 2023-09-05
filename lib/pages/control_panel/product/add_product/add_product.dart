@@ -6,7 +6,7 @@ import '../../../../services/local/models.dart';
 import '../../../../widgets/index_widgets.dart';
 
 class AddProductPage extends GetView<AddProductPageCTR> {
-  final ProductsDB? editProduct;
+  final ProductsSL? editProduct;
 
   const AddProductPage({Key? key, this.editProduct}) : super(key: key);
 

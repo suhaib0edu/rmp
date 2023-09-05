@@ -5,7 +5,7 @@ import '../../services/local/models.dart';
 
 // 1
 class InvoicePerProduct extends StatelessWidget {
-  final List<ProductsDB> listProduct;
+  final List<ProductsSL> listProduct;
   final int invoiceFormat;
 
   const InvoicePerProduct(
@@ -18,7 +18,7 @@ class InvoicePerProduct extends StatelessWidget {
       children: [
         ...listProduct
             .map((e) =>
-                BasicInvoiceTemplate(invoiceFormat: invoiceFormat, child: [
+                BasicInvoiceTemplate(dateTime: DateTime.now(),invoiceFormat: invoiceFormat, child: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -49,7 +49,7 @@ class InvoicePerProduct extends StatelessWidget {
 
 // 2
 class InvoicePerGroup extends StatelessWidget {
-  final List<CategoryDB> categoryList;
+  final List<CategorySL> categoryList;
   final int invoiceFormat;
 
   const InvoicePerGroup(
@@ -69,7 +69,7 @@ class InvoicePerGroup extends StatelessWidget {
             }
           }).toList();
           if (cat) {
-            return BasicInvoiceTemplate(invoiceFormat: invoiceFormat, child: [
+            return BasicInvoiceTemplate(dateTime: DateTime.now(),invoiceFormat: invoiceFormat, child: [
               ...lCat.products.map((e) {
                 total = total + e.num * int.parse(e.price!);
                 if (e.isSelect) {
@@ -122,10 +122,11 @@ class InvoicePerGroup extends StatelessWidget {
 // 3
 class ComprehensiveInvoice extends StatelessWidget {
   final int invoiceFormat;
-  final List<ProductsDB> listProduct;
+  final List<ProductsSL> listProduct;
+  final DateTime dateTime;
 
   const ComprehensiveInvoice(
-      {Key? key, required this.invoiceFormat, required this.listProduct})
+      {Key? key, required this.invoiceFormat, required this.listProduct, required this.dateTime})
       : super(key: key);
 
   @override
@@ -135,7 +136,7 @@ class ComprehensiveInvoice extends StatelessWidget {
     int totalDiscount = 0;
     return Column(
       children: [
-        BasicInvoiceTemplate(invoiceFormat: invoiceFormat, child: [
+        BasicInvoiceTemplate(dateTime: dateTime,invoiceFormat: invoiceFormat, child: [
           ...listProduct.map((e) {
             total = total + e.num * int.parse(e.price ?? '0');
             totalTax = totalTax + e.num * int.parse(e.tax ?? '0');
@@ -193,9 +194,11 @@ class ComprehensiveInvoice extends StatelessWidget {
 class BasicInvoiceTemplate extends StatelessWidget {
   final List<Widget> child;
   final int invoiceFormat;
+  final String cashier;
+  final DateTime dateTime;
 
   const BasicInvoiceTemplate(
-      {Key? key, required this.child, required this.invoiceFormat})
+      {Key? key, required this.child, required this.invoiceFormat, this.cashier = 'المحاسب', required this.dateTime})
       : super(key: key);
 
   @override
@@ -208,11 +211,14 @@ class BasicInvoiceTemplate extends StatelessWidget {
       child: Column(
         children: [
           if (invoiceFormat != 3)
-          const TextInvoice(
-            t: 'الكاشير : محمد',
+          TextInvoice(
+            t: 'المحاسب : $cashier',
           ),
           TextInvoice(
-            t: 'التاريخ : ${DateTime.now()}',
+            t: 'البيانات منذ : $dateTime',
+          ),
+          TextInvoice(
+            t: 'تاريخ اللحظة : ${DateTime.now()}',
           ),
           const SizedBox(
             height: 10,
