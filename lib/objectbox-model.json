@@ -95,7 +95,7 @@
     },
     {
       "id": "3:3711582294349742636",
-      "lastPropertyId": "12:8047835003916484375",
+      "lastPropertyId": "14:3801730047709226453",
       "name": "ConfigDB",
       "properties": [
         {
@@ -110,53 +110,13 @@
           "type": 9
         },
         {
-          "id": "3:1118678203256692409",
-          "name": "username",
-          "type": 9
-        },
-        {
-          "id": "4:63212286187983040",
-          "name": "email",
-          "type": 9
-        },
-        {
-          "id": "5:2152958770467388544",
-          "name": "phone",
-          "type": 9
-        },
-        {
-          "id": "6:8151104725116066760",
-          "name": "firstName",
-          "type": 9
-        },
-        {
-          "id": "7:5233626612281625058",
-          "name": "lastName",
-          "type": 9
-        },
-        {
-          "id": "8:4198384768116532384",
-          "name": "roles",
-          "type": 9
-        },
-        {
-          "id": "9:2712286144097424353",
-          "name": "exSubscriptions",
-          "type": 10
-        },
-        {
-          "id": "10:4886975065281694829",
-          "name": "isSubscription",
+          "id": "13:4256992044295971034",
+          "name": "isLogin",
           "type": 1
         },
         {
-          "id": "11:9156127011742703333",
-          "name": "isSubscriptionWindows",
-          "type": 1
-        },
-        {
-          "id": "12:8047835003916484375",
-          "name": "isSubscriptionPhone",
+          "id": "14:3801730047709226453",
+          "name": "appHasNewUpdate",
           "type": 1
         }
       ],
@@ -258,7 +218,7 @@
     },
     {
       "id": "6:7339304904525251576",
-      "lastPropertyId": "4:3243244205175151679",
+      "lastPropertyId": "7:6471499483164584841",
       "name": "RestaurantSL",
       "properties": [
         {
@@ -280,11 +240,24 @@
           "type": 1
         },
         {
-          "id": "4:3243244205175151679",
-          "name": "name",
+          "id": "5:4419687972483761003",
+          "name": "restaurantName",
           "type": 9,
           "flags": 2080,
-          "indexId": "8:9089268365640714903"
+          "indexId": "15:295687488636361156"
+        },
+        {
+          "id": "6:4509256082009201376",
+          "name": "phone",
+          "type": 9
+        },
+        {
+          "id": "7:6471499483164584841",
+          "name": "addressId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "16:8871430252047900557",
+          "relationTarget": "AddressSL"
         }
       ],
       "relations": [
@@ -515,16 +488,29 @@
     }
   ],
   "lastEntityId": "10:8828285585353863394",
-  "lastIndexId": "14:4045262936609755118",
+  "lastIndexId": "16:8871430252047900557",
   "lastRelationId": "8:3135864514899200034",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [
-    8265775163637562376
+    8265775163637562376,
+    9089268365640714903
   ],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    1118678203256692409,
+    63212286187983040,
+    2152958770467388544,
+    8151104725116066760,
+    5233626612281625058,
+    4198384768116532384,
+    2712286144097424353,
+    4886975065281694829,
+    9156127011742703333,
+    8047835003916484375,
+    3243244205175151679
+  ],
   "retiredRelationUids": [
     7032507891927946935
   ],

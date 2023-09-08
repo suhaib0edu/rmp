@@ -108,7 +108,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(3, 3711582294349742636),
       name: 'ConfigDB',
-      lastPropertyId: const IdUid(12, 8047835003916484375),
+      lastPropertyId: const IdUid(14, 3801730047709226453),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -122,53 +122,13 @@ final _entities = <ModelEntity>[
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 1118678203256692409),
-            name: 'username',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(4, 63212286187983040),
-            name: 'email',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(5, 2152958770467388544),
-            name: 'phone',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(6, 8151104725116066760),
-            name: 'firstName',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(7, 5233626612281625058),
-            name: 'lastName',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(8, 4198384768116532384),
-            name: 'roles',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(9, 2712286144097424353),
-            name: 'exSubscriptions',
-            type: 10,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(10, 4886975065281694829),
-            name: 'isSubscription',
+            id: const IdUid(13, 4256992044295971034),
+            name: 'isLogin',
             type: 1,
             flags: 0),
         ModelProperty(
-            id: const IdUid(11, 9156127011742703333),
-            name: 'isSubscriptionWindows',
-            type: 1,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(12, 8047835003916484375),
-            name: 'isSubscriptionPhone',
+            id: const IdUid(14, 3801730047709226453),
+            name: 'appHasNewUpdate',
             type: 1,
             flags: 0)
       ],
@@ -271,7 +231,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(6, 7339304904525251576),
       name: 'RestaurantSL',
-      lastPropertyId: const IdUid(4, 3243244205175151679),
+      lastPropertyId: const IdUid(7, 6471499483164584841),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -291,11 +251,23 @@ final _entities = <ModelEntity>[
             type: 1,
             flags: 0),
         ModelProperty(
-            id: const IdUid(4, 3243244205175151679),
-            name: 'name',
+            id: const IdUid(5, 4419687972483761003),
+            name: 'restaurantName',
             type: 9,
             flags: 2080,
-            indexId: const IdUid(8, 9089268365640714903))
+            indexId: const IdUid(15, 295687488636361156)),
+        ModelProperty(
+            id: const IdUid(6, 4509256082009201376),
+            name: 'phone',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 6471499483164584841),
+            name: 'addressId',
+            type: 11,
+            flags: 520,
+            indexId: const IdUid(16, 8871430252047900557),
+            relationTarget: 'AddressSL')
       ],
       relations: <ModelRelation>[
         ModelRelation(
@@ -535,12 +507,24 @@ ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
       lastEntityId: const IdUid(10, 8828285585353863394),
-      lastIndexId: const IdUid(14, 4045262936609755118),
+      lastIndexId: const IdUid(16, 8871430252047900557),
       lastRelationId: const IdUid(8, 3135864514899200034),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
-      retiredIndexUids: const [8265775163637562376],
-      retiredPropertyUids: const [],
+      retiredIndexUids: const [8265775163637562376, 9089268365640714903],
+      retiredPropertyUids: const [
+        1118678203256692409,
+        63212286187983040,
+        2152958770467388544,
+        8151104725116066760,
+        5233626612281625058,
+        4198384768116532384,
+        2712286144097424353,
+        4886975065281694829,
+        9156127011742703333,
+        8047835003916484375,
+        3243244205175151679
+      ],
       retiredRelationUids: const [7032507891927946935],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -653,64 +637,26 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (ConfigDB object, fb.Builder fbb) {
           final tokenOffset =
               object.token == null ? null : fbb.writeString(object.token!);
-          final usernameOffset = object.username == null
-              ? null
-              : fbb.writeString(object.username!);
-          final emailOffset =
-              object.email == null ? null : fbb.writeString(object.email!);
-          final phoneOffset =
-              object.phone == null ? null : fbb.writeString(object.phone!);
-          final firstNameOffset = object.firstName == null
-              ? null
-              : fbb.writeString(object.firstName!);
-          final lastNameOffset = object.lastName == null
-              ? null
-              : fbb.writeString(object.lastName!);
-          final rolesOffset =
-              object.roles == null ? null : fbb.writeString(object.roles!);
-          fbb.startTable(13);
+          fbb.startTable(15);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, tokenOffset);
-          fbb.addOffset(2, usernameOffset);
-          fbb.addOffset(3, emailOffset);
-          fbb.addOffset(4, phoneOffset);
-          fbb.addOffset(5, firstNameOffset);
-          fbb.addOffset(6, lastNameOffset);
-          fbb.addOffset(7, rolesOffset);
-          fbb.addInt64(8, object.exSubscriptions?.millisecondsSinceEpoch);
-          fbb.addBool(9, object.isSubscription);
-          fbb.addBool(10, object.isSubscriptionWindows);
-          fbb.addBool(11, object.isSubscriptionPhone);
+          fbb.addBool(12, object.isLogin);
+          fbb.addBool(13, object.appHasNewUpdate);
           fbb.finish(fbb.endTable());
           return object.id;
         },
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final exSubscriptionsValue =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 20);
+
           final object = ConfigDB(
               id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
               token: const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 6),
-              username: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 8),
-              email: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 10),
-              phone: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 12),
-              firstName: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 14),
-              lastName: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 16),
-              roles: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 18),
-              exSubscriptions: exSubscriptionsValue == null
-                  ? null
-                  : DateTime.fromMillisecondsSinceEpoch(exSubscriptionsValue),
-              isSubscription: const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 22),
-              isSubscriptionWindows: const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 24),
-              isSubscriptionPhone: const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 26));
+              isLogin: const fb.BoolReader()
+                  .vTableGet(buffer, rootOffset, 28, false),
+              appHasNewUpdate: const fb.BoolReader()
+                  .vTableGet(buffer, rootOffset, 30, false));
 
           return object;
         }),
@@ -825,7 +771,7 @@ ModelDefinition getObjectBoxModel() {
         }),
     RestaurantSL: EntityDefinition<RestaurantSL>(
         model: _entities[5],
-        toOneRelations: (RestaurantSL object) => [],
+        toOneRelations: (RestaurantSL object) => [object.address],
         toManyRelations: (RestaurantSL object) => {
               RelInfo<RestaurantSL>.toMany(3, object.id): object.category,
               RelInfo<RestaurantSL>.toMany(4, object.id): object.orders,
@@ -840,13 +786,18 @@ ModelDefinition getObjectBoxModel() {
           final serverIDOffset = object.serverID == null
               ? null
               : fbb.writeString(object.serverID!);
-          final nameOffset =
-              object.name == null ? null : fbb.writeString(object.name!);
-          fbb.startTable(5);
+          final restaurantNameOffset = object.restaurantName == null
+              ? null
+              : fbb.writeString(object.restaurantName!);
+          final phoneOffset =
+              object.phone == null ? null : fbb.writeString(object.phone!);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, serverIDOffset);
           fbb.addBool(2, object.isUpload);
-          fbb.addOffset(3, nameOffset);
+          fbb.addOffset(4, restaurantNameOffset);
+          fbb.addOffset(5, phoneOffset);
+          fbb.addInt64(6, object.address.targetId);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -859,9 +810,14 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGetNullable(buffer, rootOffset, 6),
               isUpload:
                   const fb.BoolReader().vTableGet(buffer, rootOffset, 8, false),
-              name: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 10))
+              restaurantName: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 12),
+              phone: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 14))
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          object.address.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0);
+          object.address.attach(store);
           InternalToManyAccess.setRelInfo<RestaurantSL>(object.category, store,
               RelInfo<RestaurantSL>.toMany(3, object.id));
           InternalToManyAccess.setRelInfo<RestaurantSL>(
@@ -1162,45 +1118,13 @@ class ConfigDB_ {
   static final token =
       QueryStringProperty<ConfigDB>(_entities[2].properties[1]);
 
-  /// see [ConfigDB.username]
-  static final username =
-      QueryStringProperty<ConfigDB>(_entities[2].properties[2]);
+  /// see [ConfigDB.isLogin]
+  static final isLogin =
+      QueryBooleanProperty<ConfigDB>(_entities[2].properties[2]);
 
-  /// see [ConfigDB.email]
-  static final email =
-      QueryStringProperty<ConfigDB>(_entities[2].properties[3]);
-
-  /// see [ConfigDB.phone]
-  static final phone =
-      QueryStringProperty<ConfigDB>(_entities[2].properties[4]);
-
-  /// see [ConfigDB.firstName]
-  static final firstName =
-      QueryStringProperty<ConfigDB>(_entities[2].properties[5]);
-
-  /// see [ConfigDB.lastName]
-  static final lastName =
-      QueryStringProperty<ConfigDB>(_entities[2].properties[6]);
-
-  /// see [ConfigDB.roles]
-  static final roles =
-      QueryStringProperty<ConfigDB>(_entities[2].properties[7]);
-
-  /// see [ConfigDB.exSubscriptions]
-  static final exSubscriptions =
-      QueryIntegerProperty<ConfigDB>(_entities[2].properties[8]);
-
-  /// see [ConfigDB.isSubscription]
-  static final isSubscription =
-      QueryBooleanProperty<ConfigDB>(_entities[2].properties[9]);
-
-  /// see [ConfigDB.isSubscriptionWindows]
-  static final isSubscriptionWindows =
-      QueryBooleanProperty<ConfigDB>(_entities[2].properties[10]);
-
-  /// see [ConfigDB.isSubscriptionPhone]
-  static final isSubscriptionPhone =
-      QueryBooleanProperty<ConfigDB>(_entities[2].properties[11]);
+  /// see [ConfigDB.appHasNewUpdate]
+  static final appHasNewUpdate =
+      QueryBooleanProperty<ConfigDB>(_entities[2].properties[3]);
 }
 
 /// [OrdersSL] entity fields to define ObjectBox queries.
@@ -1278,9 +1202,17 @@ class RestaurantSL_ {
   static final isUpload =
       QueryBooleanProperty<RestaurantSL>(_entities[5].properties[2]);
 
-  /// see [RestaurantSL.name]
-  static final name =
+  /// see [RestaurantSL.restaurantName]
+  static final restaurantName =
       QueryStringProperty<RestaurantSL>(_entities[5].properties[3]);
+
+  /// see [RestaurantSL.phone]
+  static final phone =
+      QueryStringProperty<RestaurantSL>(_entities[5].properties[4]);
+
+  /// see [RestaurantSL.address]
+  static final address =
+      QueryRelationToOne<RestaurantSL, AddressSL>(_entities[5].properties[5]);
 
   /// see [RestaurantSL.category]
   static final category =
