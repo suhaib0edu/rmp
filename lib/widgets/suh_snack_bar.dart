@@ -8,6 +8,9 @@ class SuhSnackBar {
   static messageCheckFieldNotEmpty() =>
       warningSnackBar(message: 'تحقق ان جميع الحقول مدخلة بشكل صحيح');
 
+  static messageSelectElement() =>
+      warningSnackBar(message: 'حدد عنصر');
+
   static warningSnackBar({
     required String message,
   }) {

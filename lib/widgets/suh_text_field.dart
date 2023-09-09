@@ -7,9 +7,11 @@ class SuhTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final int? minLines;
   final double? radius;
+  final bool readOnly;
+  final Widget? suffixIcon;
 
   const SuhTextField(
-      {Key? key, this.hintText, this.controller, this.keyboardType, this.minLines, this.radius,})
+      {Key? key, this.hintText, this.controller, this.keyboardType, this.minLines, this.radius, this.readOnly = false, this.suffixIcon})
       : super(key: key);
 
   @override
@@ -21,13 +23,15 @@ class SuhTextField extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: TextField(
           controller: controller,
+          readOnly: readOnly,
           decoration: InputDecoration(
               hintText: hintText ?? 'اسم العميل',
+              suffixIcon: suffixIcon,
               hintStyle: TextStyle(
                   color: SuhColors.text.withOpacity(0.7),
                   fontSize: 15),
               border: InputBorder.none),
-          style: TextStyle(color: SuhColors.text,fontSize: 13),
+          style: TextStyle(color: SuhColors.text, fontSize: 13),
           keyboardType: keyboardType,
           minLines: minLines,
           maxLines: minLines,
