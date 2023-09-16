@@ -1,16 +1,16 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:rmp/index_c.dart';
+import 'package:rmp/pages/auth/auth_page.dart';
 import 'package:rmp/services/utils.dart';
 
 class GraphQlRMP {}
 
 class ConfigGraphQL {
-  HttpLink httpLink = HttpLink('http://192.168.43.152:8000/graphql/');
+  // HttpLink httpLink = HttpLink('http://192.168.43.152:8000/graphql/');
 
-  // HttpLink httpLink = HttpLink('http://192.168.43.243:8000/graphql/');
+  HttpLink httpLink = HttpLink('http://192.168.43.243:8000/graphql/');
 
   GraphQLClient gClient({required bool withToken}) {
-
     Link link = AuthLink(
       getToken: () async {
         ConfigDB configD = configDB.getAll().first;
@@ -66,6 +66,7 @@ class GQL {
       debugPrint(
           '#ConfigGraphQL.httpLink.uri => ${configGraphQL.httpLink.uri}');
       debugPrint('#document => $document');
+      debugPrint('#variables => $variables');
       QueryResult result = await gClient.mutate(MutationOptions(
         document: gql(document),
         variables: variables,
@@ -84,7 +85,17 @@ class GQL {
         configD.token = result.data?[nMutation]['token'];
         configDB.put(configD);
       }
-      return result.data?[nMutation];
+      var res = result.data?[nMutation];
+      if (res['error']
+          .toString()
+          .contains('django.contrib.auth.models.AnonymousUser')) {
+        configD.isLogin = false;
+        configD.token= null;
+        configDB.put(configD);
+        Get.offAll(() => const AuthPage());
+      }
+
+      return res;
     } catch (e) {
       suhErrorIN('GQL=> mutation()', e);
     }
