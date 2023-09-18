@@ -18,31 +18,42 @@ class AuthPage extends GetView<AuthPageCTR> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               InkWell(
-                onTap: ()=>Get.to(()=> const StartPage()),
+                onTap: () => Get.to(() => const StartPage()),
                 child: Icon(
                   Icons.flutter_dash,
                   color: SuhColors.background2,
                   size: 80,
                 ),
               ),
-              Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: SuhText(text: 'تسجيل الدخول الي  :',),
-                  ),
-                  SuhTextButtonFill(
-                    title: 'حساب المدير',
-                    color: SuhColors.buttonO,
-                    width: Get.width / 2,
-                    onTap: () => controller.auth(),
-                  ),
-                  SuhTextButtonFill(
-                    title: 'حساب المحاسب',
-                    color: SuhColors.buttonO,
-                    width: Get.width / 2,
-                  ),
-                ],
+              Visibility(
+                visible: controller.checkStateLogin==0,
+                child: CircularProgressIndicator(
+                  color: SuhColors.buttonO,
+                ),
+              ),
+              Visibility(
+                visible: controller.checkStateLogin==2,
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: SuhText(
+                        text: 'تسجيل الدخول الي  :',
+                      ),
+                    ),
+                    SuhTextButtonFill(
+                      title: 'حساب المدير',
+                      color: SuhColors.buttonO,
+                      width: Get.width / 2,
+                      onTap: () => controller.auth(),
+                    ),
+                    SuhTextButtonFill(
+                      title: 'حساب المحاسب',
+                      color: SuhColors.buttonO,
+                      width: Get.width / 2,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

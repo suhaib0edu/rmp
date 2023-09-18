@@ -6,6 +6,14 @@ import '../../models/models.dart';
 import 'restaurant_list/restaurant_list.dart';
 
 class AuthPageCTR extends GetxController {
+  int checkStateLogin = 0; //0=checking,1=login,2=not
+
+  @override
+  void onInit() {
+    checkUserLogin();
+    super.onInit();
+  }
+
   auth() async {
     try {
       GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -47,14 +55,7 @@ class AuthPageCTR extends GetxController {
       if (modelMutation.success == true) {
         try {
           var user = modelMutation.user;
-          ConfigDB configD = configDB.getAll().first;
-          configD.username = user?.username;
-          configD.email = user?.email;
-          configD.phone = user?.phone;
-          configD.firstName = user?.firstName;
-          configD.lastName = user?.lastName;
-          configD.roles = user?.roles;
-          configDB.put(configD);
+          setLogin(user: user);
         } finally {
           Get.to(() => const RestaurantListPage());
         }
@@ -85,14 +86,11 @@ class AuthPageCTR extends GetxController {
       if (modelMutation.success == true) {
         try {
           var user = modelMutation.user;
-          ConfigDB configD = configDB.getAll().first;
-          configD.username = user?.username;
-          configD.email = user?.email;
-          configD.phone = user?.phone;
-          configD.firstName = user?.firstName;
-          configD.lastName = user?.lastName;
-          configD.roles = user?.roles;
-          configDB.put(configD);
+          setLogin(user: user);
+          if (user != null && user.restaurant != null) {
+            UserSL().addRestaurant(
+                listRestaurant: user.restaurant ?? <Restaurant>[],fromServer: true);
+          }
         } finally {
           Get.to(() => const RestaurantListPage());
         }
@@ -102,6 +100,24 @@ class AuthPageCTR extends GetxController {
       suhErrorIN('AuthPageCTR=>loginUser()', e);
     }
     return false;
+  }
+
+  Future<void> checkUserLogin() async {
+    checkStateLogin = configDB.getAll().first.isLogin ? 1 : 2;
+    await Future.delayed(const Duration(seconds: 3), () => update());
+    if (checkStateLogin == 1) {
+      Get.off(() => const RestaurantListPage());
+      checkStateLogin = 2;
+    }
+  }
+
+  void setLogin({User? user}) {
+    try {
+      UserSL().toDB(user: user);
+      ConfigDB().setIsLogin();
+    } catch (e) {
+      suhErrorIN('setLogin()', e);
+    }
   }
 }
 
@@ -193,6 +209,56 @@ username: String
         id
         deviceType
         deviceDetails
+      }
+      restaurant {
+        id
+        phone
+        restaurantName
+        Category {
+          id
+          name
+          Products {
+            id
+            name
+            price
+            tax
+            discount
+          }
+        }
+        address {
+          id
+          country
+          state
+          city
+          neighborhood
+        }
+        cahir {
+          username
+          roles
+          firstName
+          lastName
+        }
+        orders {
+          id
+          orderDate
+          orderType
+          accountant {
+            username
+            roles
+          }
+          products {
+            id
+            name
+            price
+            tax
+            discount
+          }
+        }
+        subscriptions {
+          id
+          subscriptionDate
+          expiryDate
+        }
       }
     }
       ''',
